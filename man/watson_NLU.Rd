@@ -2,7 +2,7 @@
 % Please edit documentation in R/watson_NLU.R
 \name{watson_NLU}
 \alias{watson_NLU}
-\title{Watson Natural Language Understanding API Wrapper function}
+\title{Watson Natural Language Understanding API Wrapper}
 \usage{
 watson_NLU(text = NULL, url = NULL, username = NULL, password = NULL,
   features = list(), version = "?version=2018-03-16")
@@ -16,9 +16,9 @@ but not both.}
 Either \code{text} or \code{url} argument has to be specified,
 but not both.}
 
-\item{username}{Authenitcation IBM Watson Natural-Language-Understanding-3j username}
+\item{username}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}}
 
-\item{password}{Authenitcation IBM Watson Natural-Language-Understanding-3j password}
+\item{password}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}}
 
 \item{features}{Text analysis features, such as \emph{keywords}, specified as
 list item names. Feature attributes, such as \emph{emotions} or \emph{sentiment},
@@ -30,5 +30,5 @@ specified as list values.}
 A nested list object with content of API response.
 }
 \description{
-See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{API} documentation for more information.
+See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
 }
