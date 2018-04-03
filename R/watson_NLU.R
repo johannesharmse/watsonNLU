@@ -1,3 +1,23 @@
+#' Watson Natural Language Understanding [API](https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze) Wrapper function
+#'
+#'
+#' @param text text string to be analyzed.
+#'    Either `text` or `url` argument has to be specified,
+#'    but not both.
+#' @param url url to text to be analyzed.
+#'    Either `text` or `url` argument has to be specified,
+#'    but not both.
+#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j username
+#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j password
+#' @param features Text analysis features, such as *keywords*, specified as
+#'    list item names. Feature attributes, such as *emotions* or *sentiment*,
+#'    specified as list values.
+#' @param version The release date of the API version to use.
+#' @return A nested list object with content of API response.
+#'
+#' @import httr
+#'
+#' @export
 watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL, features = list(), version="?version=2018-03-16"){
 
   # api URL
