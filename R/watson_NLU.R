@@ -55,7 +55,7 @@ watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL,
 
   features_attr <- paste0(features_attr, collapse = "")
 
-  # POST
+  # GET
   response <- GET(url=paste0(
     url_NLU,
     "/v1/analyze",
@@ -69,8 +69,9 @@ watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL,
 
   # check for successful response
   if (status_code(response) != 200){
+    message(response)
     stop("Please make sure your username and password combination is correct
-         and that you have a valid internet connection.")
+         and that you have a valid internet connection or check the response log above.")
   }
 
   # get response structured content
