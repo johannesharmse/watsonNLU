@@ -1,16 +1,18 @@
-#' Watson Natural Language Understanding [API](https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze) Wrapper function
+#' Watson Natural Language Understanding API Wrapper function
+#'
+#' See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{API} documentation for more information.
 #'
 #'
 #' @param text text string to be analyzed.
-#'    Either `text` or `url` argument has to be specified,
+#'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
 #' @param url url to text to be analyzed.
-#'    Either `text` or `url` argument has to be specified,
+#'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
 #' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j username
 #' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j password
-#' @param features Text analysis features, such as *keywords*, specified as
-#'    list item names. Feature attributes, such as *emotions* or *sentiment*,
+#' @param features Text analysis features, such as \emph{keywords}, specified as
+#'    list item names. Feature attributes, such as \emph{emotions} or \emph{sentiment},
 #'    specified as list values.
 #' @param version The release date of the API version to use.
 #' @return A nested list object with content of API response.
