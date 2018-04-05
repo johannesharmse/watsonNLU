@@ -71,8 +71,9 @@ devtools::install_github("johannesharmse/watsonNLU")
 
 ### Package Dependencies
 
-### Similar Packages and Functions
+### Similar Packages
 
+We found this package [WatsonR](https://github.com/rustyoldrake/WatsonR) to be another relevant API wrapper around IBM Watson API.
 
 ## License
 
