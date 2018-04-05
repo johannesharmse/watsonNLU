@@ -34,7 +34,6 @@ Created by</a></h5>
 <h4 align="center">
   <a href="#key-features">Key Features</a> &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
   <a href="#install">Install</a> &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-  <a href="#how-to-use">How To Use</a> &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
   <a href="#credits">Credits</a> &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
   <a href="#related">Related</a> &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
   <a href="#license">License</a>
@@ -52,54 +51,11 @@ Created by</a></h5>
 ## Install
 
 
-
-## How To Use
-
-### Contribution Overview
-
-The adopted contribution process requires that the collaborators fork the original repository and create pull requests for the changes to be approved by a team member. Here are some useful commands:
-
-1. After forking the original repository, clone this forked version (as instructed by [CristinaSolana](https://gist.github.com/CristinaSolana/1885435)):
-
-```git
-git clone git@github.com:YOUR-USERNAME/YOUR-FORKED-REPO.git
-```
-2. Add remote from original repository in your forked repository:
-
-```git
-cd into/cloned/fork-repo
-git remote add upstream git://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git
-git fetch upstream
-```
-
-3. Updating your fork from original repo to keep up with their changes:
-
-```git
-git pull upstream master
-```
-
-3. After completing some tasks:
-
-    1. Add *all* files that have been worked on
-        ```
-        git add .
-        ```
-   2. Add commit message
-       ```
-       git commit -m '[COMMIT MESSAGE]'
-       ```
-   4. Push anytime after that
-       ```
-       git push
-       ```
-   5. Navigate to  [Compare changes](https://github.com/johannesharmse/watsonNLU/compare) and create pull request for the branch of interest.
-
-   6. Wait for a member of the team to merge [pull request](https://github.com/johannesharmse/watsonNLU/pulls).
-
 ## Credits
 
-* README structure borrowed from my other R package project ([ptoolkit](https://github.com/UBC-MDS/ptoolkit))
+* README structure borrowed from [@vmulholl](https://github.com/vmulholl)'s other R package project ([ptoolkit](https://github.com/UBC-MDS/ptoolkit))
   + formatting inspiration from  [Markdownify](https://github.com/amitmerchant1990/electron-markdownify/blob/master/README.md#key-features)
+* Contributing conventions inspired from [@simrnsethi](https://github.com/simrnsethi)'s other R package ([regscoreR](https://github.com/UBC-MDS/regscoreR))
 * Badges by [Shields IO](https://shields.io/)
 * Logo by IBM Watson
 
@@ -115,7 +71,10 @@ git pull upstream master
 
 [MIT License](https://github.com/johannesharmse/watsonNLU/blob/master/LICENSE)
 
-Interested in contributing?
+## How to Contribute
+
+**Interested in contributing?**
+
 See our [Contributing Guidelines](https://github.com/johannesharmse/watsonNLU/blob/master/CONTRIBUTING.md) and [Code of Conduct](https://github.com/johannesharmse/watsonNLU/blob/master/CONDUCT.md).
 
 ---
