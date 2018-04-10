@@ -1,7 +1,7 @@
 
 <h5 align="center">
   <br>
-<img src="doc/pictures/IBMWatson_vignette.png" alt="IBMWatson" width="200"></a>
+<img src="doc/pictures/IBMWatson.png" alt="IBMWatson" width="200"></a>
 <br>
 </h5>
 
