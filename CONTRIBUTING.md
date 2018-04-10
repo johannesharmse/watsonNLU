@@ -20,10 +20,18 @@ git fetch upstream
 ```
 
 3. Updating your fork from original repo to keep up with their changes:
-
-```git
-git pull upstream master
-```
+    1. Fetch the branches and their commits from the upstream repository.
+      ```git
+      git fetch upstream
+      ```
+    2. Got to your fork's local master branch:
+      ```
+      git checkout master
+      ```
+    3. Merge the changes from upstream/master into the local master branch:
+      ```
+      git merge upstream/master
+      ```
 
 3. After completing some tasks:
 
@@ -44,7 +52,7 @@ git pull upstream master
    6. Wait for a member of the team to merge [pull request](https://github.com/johannesharmse/watsonNLU/pulls).
 
 
-## Contributor Agreement: 
+## Contributor Agreement:
 
 ### Tasks:
 
@@ -53,7 +61,7 @@ git pull upstream master
 ### Communication:
 Each group member is responsible to be:
 
-- Responsive on Slack, especially during Friday and Saturday. 
+- Responsive on Slack, especially during Friday and Saturday.
 - 10-minute stand-up meeting on Monday during lunch break, to talk about weekly plan.
 
 ### Contribute to the project
@@ -76,7 +84,7 @@ Each group member is responsible to be:
    - **If a major change is made by any person, tag atleast two other contributors. If this change is approved by all → accept pull request.
 
 2.   We also use GitHub flow (fork) to manage changes:
-   - Fork [(How to fork)](https://help.github.com/articles/working-with-forks/), then clone this repo. 
+   - Fork [(How to fork)](https://help.github.com/articles/working-with-forks/), then clone this repo.
    - Push that branch to your fork of this repository on GitHub.
    - Submit a pull request
    - If you receive feedback, make changes on your desktop and push to your branch on GitHub: the pull request will update automatically.
@@ -84,12 +92,12 @@ Each group member is responsible to be:
 
 ## How to Contribute
 
-#### Code comment 
+#### Code comment
 - Functions need to be documented clearly.
 
 #### Commit message
 - Big changes:
-  
+
 ```
  git commit -m "A brief summary of the commit
 
@@ -107,7 +115,7 @@ git commit -m "Concise summary of what you did here"
 
 
 #### Testing conventions
-- We will be using `testthat` to test our functions. 
+- We will be using `testthat` to test our functions.
 - `codecov` will be used to test the coverage of all the tests written using `testthat`.
 - The following checks have to be implemented before submitting any major pull request to a stable version of the package:
 
