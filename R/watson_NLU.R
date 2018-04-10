@@ -1,3 +1,25 @@
+#' Watson Natural Language Understanding API Wrapper
+#'
+#' See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
+#'
+#'
+#' @param text text string to be analyzed.
+#'    Either \code{text} or \code{url} argument has to be specified,
+#'    but not both.
+#' @param url url to text to be analyzed.
+#'    Either \code{text} or \code{url} argument has to be specified,
+#'    but not both.
+#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}
+#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}
+#' @param features Text analysis features, such as \emph{keywords}, specified as
+#'    list item names. Feature attributes, such as \emph{emotions} or \emph{sentiment},
+#'    specified as list values.
+#' @param version The release date of the API version to use.
+#' @return A nested list object with content of API response.
+#'
+#' @import httr
+#'
+#' @export
 watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL, features = list(), version="?version=2018-03-16"){
 
   # api URL
@@ -55,7 +77,7 @@ watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL,
 
   features_attr <- paste0(features_attr, collapse = "")
 
-  # POST
+  # GET
   response <- GET(url=paste0(
     url_NLU,
     "/v1/analyze",
@@ -69,8 +91,9 @@ watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL,
 
   # check for successful response
   if (status_code(response) != 200){
+    message(response)
     stop("Please make sure your username and password combination is correct
-         and that you have a valid internet connection.")
+         and that you have a valid internet connection or check the response log above.")
   }
 
   # get response structured content
