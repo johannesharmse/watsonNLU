@@ -1,0 +1,22 @@
+#' Watson Natural Language Understanding API Wrapper
+#'
+#' See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
+#'
+#'
+#' @param text text string to be analyzed.
+#'    Either \code{text} or \code{url} argument has to be specified,
+#'    but not both.
+#' @param url url to text to be analyzed.
+#'    Either \code{text} or \code{url} argument has to be specified,
+#'    but not both.
+#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}
+#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}
+#' @param features Text analysis features, such as \emph{keywords}, specified as
+#'    list item names. Feature attributes, such as \emph{emotions} or \emph{sentiment},
+#'    specified as list values.
+#' @param version The release date of the API version to use.
+#' @return A nested list object with content of API response.
+#'
+#' @import httr
+#'
+#' @export
