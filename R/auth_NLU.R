@@ -1,3 +1,22 @@
+#' Watson Natural Language Understanding API Authentication
+#'
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API.
+#'
+#'
+#' @param username Authentication IBM Watson Natural-Language-Understanding-3j \strong{username}
+#' @param password Authentication IBM Watson Natural-Language-Understanding-3j \strong{password}
+#'
+#' @return If authentication is successful, there is no return value. If unsuccessful,
+#'    the function will ask the user to ensure username and password combination are correct.
+#'
+#' @examples
+#' # Find username and password under service credentials
+#' auth_NLU(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX')
+#'
+#' @import httr
+#'
+#' @export
+
 auth_NLU <- function(username = NULL, password=NULL){
   # check that username and password have been specified as character arguments
   if (is.null(username) ||
@@ -5,22 +24,22 @@ auth_NLU <- function(username = NULL, password=NULL){
       !is.character(username) ||
       !is.character(password)){
     stop("Please specify a valid username and password combination as string arguments.")
-    
-    # base login url 
+
+    # base login url
     url_NLU="https://gateway.watsonplatform.net/natural-language-understanding/api"
     # or try this:
     # "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2017-02-27&url=www.ibm.com&features=keywords,entities",
-    
-    
+
+
     # instead of doing full GET, would it make sense to do a post?
     test_post <- POST(authenticate(username, password), add_headers("Content-Type"="application/json"))
-    
+
     # GET -- opens channel with credentials
     response <- GET(url=url_NLU,
       authenticate(username,password),
       add_headers("Content-Type"="application/json")
     )
-    
+
     # check for successful response
     if (status_code(response) != 200){
       message(response)
@@ -28,6 +47,5 @@ auth_NLU <- function(username = NULL, password=NULL){
          and that you have a valid internet connection or check the response log above.")
   }
   }
-}  
+}
 
-  
