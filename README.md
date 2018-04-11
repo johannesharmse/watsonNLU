@@ -69,6 +69,8 @@ The authentication function will take the credentials generated [here](https://c
 
 #### Relevance
 
+#### Category
+
 
 ## Installation
 
