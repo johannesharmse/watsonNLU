@@ -44,17 +44,31 @@ Created by</a></h5>
 
 ## Key Features
 
-The `watsonNLU` R wrapper package integrates with the IBM Watson Natural Language Understanding service to produce a variety of outputs including:
+The `watsonNLU` R wrapper package integrates with the **IBM Watson Natural Language Understanding** service to produce a variety of outputs including:
 
 * sentiment
-* feelings
+* emotions
 * categories
 * relevance
 
+Natural language processing analyses semantic features of the text while the Watson API cleans the HTML content so that the information can be handled by the R wrapper to produce a neat data frame output for each of the functions.  
 
 ### Package Functions
 
-TBD
+This section provides an overview of each of the functions. Please refer to <a href="#installation">Installation</a> for more usage details.
+
+#### Authentication
+
+The authentication function will take the credentials generated [here](https://console.bluemix.net/services/natural-language-understanding/3464cdba-a428-4934-945e-3dfd87d4e49c/?paneId=credentials&new=true&env_id=ibm:yp:us-south&org=89ae7f05-90ac-4efa-a089-e0a83704a79e&space=24853127-1fa6-4544-9835-e230bed91e8e) (you must be signed into your account).
+
+#### Sentiment
+
+
+#### Emotion
+
+
+#### Relevance
+
 
 ## Installation
 
@@ -69,13 +83,13 @@ To use the Watson NLU API you must create an account with the IBM developper clo
 
 2. Use your credentials to log in and add the Natural [Language Understanding services](https://console.bluemix.net/catalog/services/natural-language-understanding) service and click "Create".
 
-    ![](doc/pictures/readme/2_newcredentials.png)
-
 3. Go to [Service credentials](https://console.bluemix.net/services/natural-language-understanding/3464cdba-a428-4934-945e-3dfd87d4e49c/?paneId=credentials&new=true&env_id=ibm:yp:us-south&org=89ae7f05-90ac-4efa-a089-e0a83704a79e&space=24853127-1fa6-4544-9835-e230bed91e8e) and create "New credentials".
 
-      ![](doc/pictures/readme/3_viewcreds.png)
+    ![](doc/pictures/readme/2_newcredentials.png)
 
 4. Use these credentials as the username and password within the R wrapper authentication function {INSERT FUNCTION NAME HERE}
+
+      ![](doc/pictures/readme/3_viewcreds.png)
 
 You can install watsonNLU in R from GitHub with:
 
