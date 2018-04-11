@@ -44,23 +44,65 @@ Created by</a></h5>
 
 ## Key Features
 
+The `watsonNLU` R wrapper package integrates with the IBM Watson Natural Language Understanding service to produce a variety of outputs including:
+
+* sentiment
+* feelings
+* categories
+* relevance
+
 
 ### Package Functions
 
+TBD
 
 ## Installation
 
-You can install watsonNLU from github with:
+### Sign up with IBM and download R package
+
+To use the Watson NLU API you must create an account with the IBM developper cloud.
+
+1. Follow the link to the [Natural Language Understand](https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/) page and follow the _Sign in to IBM Cloud_ link or click  ["Get Started Free"](https://console.bluemix.net/registration?target=%2Fcatalog%2Fservices%2Fnatural-language-understanding%3FhideTours%3Dtrue%26cm_mmc%3DOSocial_Tumblr-_-Watson%2BCore_Watson%2BCore%2B-%2BPlatform-_-WW_WW-_-wdc-ref%26cm_mmc%3DOSocial_Tumblr-_-Watson%2BCore_Watson%2BCore%2B-%2BPlatform-_-WW_WW-_-wdc-ref%26cm_mmca1%3D000000OF%26cm_mmca2%3D10000409_). Check your inbox to complete registration.
+
+    ![](doc/pictures/readme/1_addservice.png)
+
+
+2. Use your credentials to log in and add the Natural [Language Understanding services](https://console.bluemix.net/catalog/services/natural-language-understanding) service and click "Create".
+
+    ![](doc/pictures/readme/2_newcredentials.png)
+
+3. Go to [Service credentials](https://console.bluemix.net/services/natural-language-understanding/3464cdba-a428-4934-945e-3dfd87d4e49c/?paneId=credentials&new=true&env_id=ibm:yp:us-south&org=89ae7f05-90ac-4efa-a089-e0a83704a79e&space=24853127-1fa6-4544-9835-e230bed91e8e) and create "New credentials".
+
+      ![](doc/pictures/readme/3_viewcreds.png)
+
+4. Use these credentials as the username and password within the R wrapper authentication function {INSERT FUNCTION NAME HERE}
+
+You can install watsonNLU in R from GitHub with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("johannesharmse/watsonNLU")
 ```
 
+### Example Workflow
+
+TO BE EDITED WITH ATOMIC FUNCTION WORKFLOW.
+
+``` r
+#  original larger function
+## watson_NLU(text = NULL, url = NULL, username = NULL, password=NULL, features = list(), version="?version=2018-03-16")
+
+# example 1 -- leftist news
+leftemotions <- watson_NLU(text = NULL, url = 'http://money.cnn.com/2018/04/02/technology/pacific-newsletter/index.html', username = 'YOUR CREDENTIALS HERE', password='YOUR CREDENTIALS HERE', features = list(keywords = list(sentiment = FALSE, emotion = TRUE)), version="?version=2018-03-16")
+
+# example 1 -- rightist news
+righttemotions <- watson_NLU(text = NULL, url = 'http://www.breitbart.com/big-government/2018/04/10/live-updates-mark-zuckerberg-testifies-before-congress/', username = 'YOUR CREDENTIALS HERE', password='YOUR CREDENTIALS HERE', features = list(keywords = list(sentiment = FALSE, emotion = TRUE)), version="?version=2018-03-16")
+```
 
 ## Credits
 
-* README structure borrowed from [@vmulholl](https://github.com/vmulholl)'s other R package project ([ptoolkit](https://github.com/UBC-MDS/ptoolkit))
+* Adapted from an API wrapper project by [Johannes Harmse](https://github.com/johannesharmse/watsonNLU/blob/master/doc/references/api_lab.md)
+* README structure borrowed from other R package project ([ptoolkit](https://github.com/UBC-MDS/ptoolkit))
   + formatting inspiration from  [Markdownify](https://github.com/amitmerchant1990/electron-markdownify/blob/master/README.md#key-features)
 * Contributing conventions inspired from [@simrnsethi](https://github.com/simrnsethi)'s other R package ([regscoreR](https://github.com/UBC-MDS/regscoreR))
 * Badges by [Shields IO](https://shields.io/)
