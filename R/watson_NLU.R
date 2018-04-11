@@ -105,3 +105,7 @@ watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL,
   return(response)
 
 }
+
+# http://www.breitbart.com/big-government/2018/04/10/live-updates-mark-zuckerberg-testifies-before-congress/
+# http://money.cnn.com/2018/04/02/technology/pacific-newsletter/index.html
+watson_NLU(text = NULL, url = 'http://money.cnn.com/2018/04/02/technology/pacific-newsletter/index.html', username = '0aec4aac-c466-4d85-b1f3-4a743ae6f44c', password='RqsD83O6X4nH', features = list(keywords = list()), version="?version=2018-03-16")
