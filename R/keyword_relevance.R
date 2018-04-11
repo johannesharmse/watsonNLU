@@ -148,6 +148,8 @@ keyword_relevance <-  function(text_source = NULL, source_type = NULL, limit = N
   response[!(names(response) %in% names(features))] <- NULL
 
 
+
+
   ### OUTPUT ###
 
   # return clean output
