@@ -26,6 +26,11 @@ watson_NLU <-  function(text_source = NULL, source_type = NULL, username = NULL,
 
   accepted_source_types <- c('text', 'url')
 
+  # api URL
+  # this is the base of the API call
+  # the variables for the API call will get appended to this
+  url_NLU <- "https://gateway.watsonplatform.net/natural-language-understanding/api"
+
 
   # input argument error checking
 
@@ -51,25 +56,6 @@ watson_NLU <-  function(text_source = NULL, source_type = NULL, username = NULL,
     stop("Source type should be either 'url' or 'text'.")
   }
 
-  ### INIT ###
-
-  # api URL
-  # this is the base of the API call
-  # the variables for the API call will get appended to this
-  url_NLU <- "https://gateway.watsonplatform.net/natural-language-understanding/api"
-
-  ### ERROR CHECKING ###
-
-  # make sure user has only specified text OR URL argument
-  # API call needs text to analyze
-  # this can either be in the form of
-  # a text string or url
-  # both of these are input arguments
-  # but only one argument should be specified
-  # this condition checks that AT LEAST one of the arguments have been specified
-  if (is.null(text) && is.null(url)){
-    stop("Please specify either a text or URL, but not both.")
-  }
 
   ### ENCODING ###
 
@@ -78,15 +64,8 @@ watson_NLU <-  function(text_source = NULL, source_type = NULL, username = NULL,
   # the text needs to be encoded
   # in the case of url input
   # no encoding is necessary
-  if (is.character(text)){
-    text <- URLencode(text)
-  }else if(is.character(url)){
-    # redundant
-    url <- url
-  }else{
-    # if neither text or url input is a character string
-    # return error message
-    stop("Please specify text or URL as a string")
+  if (source_type == 'text'){
+    text_source <- URLencode(text_source)
   }
 
 
