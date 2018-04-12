@@ -20,7 +20,7 @@
 #' @import httr
 #'
 #' @export
-keyword_relevance <-  function(text_source = NULL, source_type = NULL, limit = NULL, version="?version=2018-03-16"){
+keyword_relevance <-  function(username = NULL, password = NULL, text_source = NULL, source_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
   # initialization
 
@@ -112,10 +112,10 @@ keyword_relevance <-  function(text_source = NULL, source_type = NULL, limit = N
     url_NLU,
     "/v1/analyze",
     version,
-    text_source,
+    input,
     features_string,
     limit),
-    # authenticate(username,password),
+    authenticate(username,password),
     add_headers("Content-Type"="application/json")
     )
 
@@ -145,14 +145,20 @@ keyword_relevance <-  function(text_source = NULL, source_type = NULL, limit = N
   # that the user isn't interested in
   # this needs to be removed
   # this can include things like input text metadata
-  response[!(names(response) %in% names(features))] <- NULL
 
-
-
-
+  if (!is.null(response$keywords)){
+    response <- response$keywords
+  }else{
+    stop("No results available")
+  }
   ### OUTPUT ###
 
+  keywords <- sapply(1:length(response), function(x) response[[x]]$text)
+  relevance <- sapply(1:length(response), function(x) response[[x]]$relevance)
+
+  response_df <- data.frame('keyword' = keywords, 'relevance' = relevance)
+
   # return clean output
-  return(response)
+  return(response_df)
 
 }
