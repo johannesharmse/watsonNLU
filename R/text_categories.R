@@ -20,27 +20,56 @@
 #' @import httr
 #'
 #' @export
-watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL, features = list(), version="?version=2018-03-16"){
+text_categories <-  function(username = NULL, password = NULL, text_source = NULL, source_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
-  ### INIT ###
+  # initialization
+
+  accepted_source_types <- c('text', 'url')
 
   # api URL
   # this is the base of the API call
   # the variables for the API call will get appended to this
   url_NLU <- "https://gateway.watsonplatform.net/natural-language-understanding/api"
 
-  ### ERROR CHECKING ###
+  # function feature
+  # no attribute needs to be specified
+  feauture <- "categories"
+  features_string <- paste0("&features=", feauture)
 
-  # make sure user has only specified text OR URL argument
-  # API call needs text to analyze
-  # this can either be in the form of
-  # a text string or url
-  # both of these are input arguments
-  # but only one argument should be specified
-  # this condition checks that AT LEAST one of the arguments have been specified
-  if (is.null(text) && is.null(url)){
-    stop("Please specify either a text or URL, but not both.")
+
+  # input argument error checking
+
+  if (is.null(text_source)){
+    stop("Please specify a text source to analyze.")
+  }else if(!is.character(text_source)){
+    stop("Please specify text or URL as a character string")
   }
+
+  if (is.null(source_type)){
+    message("Source type not specified. Assuming text input.")
+    source_type <- 'text'
+  }
+
+  if (!is.character(source_type)){
+    stop("Source type needs to be specified as a character string('url' or 'text').")
+  }else{
+    source_type <- tolower(source_type)
+  }
+
+
+  if (!source_type %in% accepted_source_types){
+    stop("Source type should be either 'url' or 'text'.")
+  }
+
+  if(is.null(limit)){
+    message("No limit specified. Using default API call limit.")
+  }else if(!is.numeric(limit) ||
+           length(limit) > 1){
+    message("Limit needs to be specified as a numeric integer.")
+  }else{
+    limit <- paste0("&", feauture, ".limit=", limit)
+  }
+
 
   ### ENCODING ###
 
@@ -49,30 +78,8 @@ watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL,
   # the text needs to be encoded
   # in the case of url input
   # no encoding is necessary
-  if (is.character(text)){
-    text <- URLencode(text)
-  }else if(is.character(url)){
-    # redundant
-    url <- url
-  }else{
-    # if neither text or url input is a character string
-    # return error message
-    stop("Please specify text or URL as a string")
-  }
-
-
-  ### MORE ERROR CHECKING ###
-
-  # error checking
-  # check that username and password have been specified as character arguments
-  # first checks that both username and password have values
-  # secondly checks that those values are specified as character strings
-  # error message if these checks fail
-  if (is.null(username) ||
-      is.null(password) ||
-      !is.character(username) ||
-      !is.character(password)){
-    stop("Please specify a valid username and password combination as string arguments.")
+  if (source_type == 'text'){
+    text_source <- URLencode(text_source)
   }
 
   ### STANDARDISE INPUT ###
@@ -82,63 +89,13 @@ watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL,
   # variable
   # the pre-text is necessary
   # for the API call
-  if (!is.null(text)){
-    input <- paste0("&text=", text)
-  }else{
-    input <- paste0("&url=", url)
+  if (source_type == 'text'){
+    input <- paste0("&text=", text_source)
+  }else if(source_type == 'url'){
+    input <- paste0("&url=", text_source)
   }
 
-  ### MORE ERROR CHECKING ###
 
-  # check that user has specified desired features as list object
-  # this will become unnecessary
-  # if we split the
-  # functions
-  if (!is.list(features)){
-    stop("Please specify features as a list object.")
-  }
-
-  # concatenate requested features
-  # the features AKA the names of the main
-  # feature input argument list
-  # include pre-text and seperate features
-  # with a comma
-  # as specified by the API call requirements
-  features_string <- paste0("&features=", paste0(names(features), collapse = ","))
-
-  # concatenate feature attributes
-  # each feature can have a set of attributes
-  # for the API call
-  # these need to be specified as
-  # feature.attribute=attribute_value
-  # the features are the feature input list names
-  # the attributes are the names within the vector or list
-  # that is specified for each feature name
-  # the attribute_value is generally "true", but
-  # can be something like a query limit - eg. keywords.limit=5
-  # the code below simply concatenates all the attributes and their values
-  # per feature
-  # the feature attribute string (as below) needs
-  # to be specified seperately from the
-  # list of features (as above)
-  # the attributes are collapsed with an "&" character as specified by the API documentation
-  features_attr <- c()
-
-  # loop through features
-  for (feat in 1:length(features)){
-    # check if feature has any attributes specified
-    if (length(feat) > 0){
-      # loop through attributes of a feature
-      for (attr in 1:length(feat)){
-        # append to feature attribute list
-        features_attr[length(features_attr) + 1] <-
-          paste0("&", names(features)[feat], ".", names(features[[feat]])[attr], "=", tolower(as.character(features[[feat]][attr])))
-      }
-    }
-  }
-
-  # collapse the feature attribute list as a single string for the API call
-  features_attr <- paste0(features_attr, collapse = "")
 
   ### API CALL ###
 
@@ -157,7 +114,7 @@ watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL,
     version,
     input,
     features_string,
-    features_attr),
+    limit),
     authenticate(username,password),
     add_headers("Content-Type"="application/json")
     )
@@ -188,12 +145,31 @@ watson_NLU <-  function(text = NULL, url = NULL, username = NULL, password=NULL,
   # that the user isn't interested in
   # this needs to be removed
   # this can include things like input text metadata
-  response[!(names(response) %in% names(features))] <- NULL
 
-
+  if (!is.null(response$categories)){
+    response <- response$categories
+  }else{
+    stop("No results available")
+  }
   ### OUTPUT ###
 
+  label <- sapply(1:length(response), function(x) response[[x]]$label)
+
+  label_levels <- lapply(1:length(label), function(x) strsplit(substr(label[x], 2, nchar(label[x])), split = "/", fixed = T)[[1]])
+
+  max_level <- max(sapply(label_levels, function(x) length(x)))
+
+  score <- sapply(1:length(response), function(x) response[[x]]$score)
+
+  response_df <- data.frame('score' = score)
+
+  for (i in 1:length(label_levels)){
+    for (j in 1:length(label_levels[[i]])){
+      response_df[i , paste0('category_level_', j)] <- label_levels[[i]][j]
+    }
+  }
+
   # return clean output
-  return(response)
+  return(response_df)
 
 }
