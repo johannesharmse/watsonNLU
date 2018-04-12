@@ -1,5 +1,7 @@
 #' Watson Natural Language Understanding API Authentication
 #'
+#' The \strong{auth_NLU} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API.
+#'
 #' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API.
 #'
 #'
