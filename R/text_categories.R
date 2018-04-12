@@ -1,25 +1,30 @@
-#' Watson Natural Language Understanding API Wrapper
+#' Watson Natural Language Understanding: Text Categorizer
 #'
-#' See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
+#' The \strong{text_categories} function takes in a URL or text input, and returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
+#'
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{text_categories} documentation for more useage cases.
 #'
 #'
-#' @param text text string to be analyzed.
+#' @param text text string to be categorized.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
-#' @param url url to text to be analyzed.
+#' @param url url to text to be categorized.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
-#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}
-#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}
-#' @param features Text analysis features, such as \emph{keywords}, specified as
-#'    list item names. Feature attributes, such as \emph{emotions} or \emph{sentiment},
-#'    specified as list values.
-#' @param version The release date of the API version to use.
-#' @return A nested list object with content of API response.
+#'
+#' @return A dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
+#'
+#' @examples
+#' # Find the likelihood that the given input belongs to a particular category: from text
+#' text_categories(text = 'This is a great API wrapper')
+#'
+#' # Find the likelihood that the given input belongs to a particular category: from URL
+#' text_categories(url = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/')
 #'
 #' @import httr
 #'
 #' @export
+
 text_categories <-  function(username = NULL, password = NULL, text_source = NULL, source_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
   # initialization

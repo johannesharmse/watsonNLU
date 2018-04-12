@@ -1,26 +1,31 @@
-#' Watson Natural Language Understanding API Wrapper
+#' Watson Natural Language Understanding: Relevance of Keywords
 #'
-#' See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
+#' The \strong{keyword_relevance} function takes in a URL or text input, and returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input.
+#'
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
 #'
 #'
-#' @param text text string to be analyzed.
+#' @param text text string to be categorized.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
-#' @param url url to text to be analyzed.
+#' @param url url to text to be categorized.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
-#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}
-#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}
-#' @param features Text analysis features, such as \emph{keywords}, specified as
-#'    list item names. Feature attributes, such as \emph{emotions} or \emph{sentiment},
-#'    specified as list values.
-#' @param version The release date of the API version to use.
-#' @return A nested list object with content of API response.
+#'
+#' @return A dataframe that contains keywords and their likelihood of being a keyword, for the given input.
+#'
+#' @examples
+#' # Find the likelihood that a word is a keyword from the given input: text input
+#' keyword_relevance(text = 'This is a great API wrapper')
+#'
+#' # Find the likelihood that a word is a keyword from the given input: URL input
+#' keyword_relevance(url = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/')
 #'
 #' @import httr
 #'
 #' @export
-keyword_relevance <-  function(username = NULL, password = NULL, text_source = NULL, source_type = NULL, limit = NULL, version="?version=2018-03-16"){
+
+keyword_relevance <-  function(text = NULL, url = NULL){
 
   # initialization
 

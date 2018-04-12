@@ -87,7 +87,7 @@ To use the Watson NLU API you must create an account with the IBM developper clo
 
 3. Go to [Service credentials](https://console.bluemix.net/services/natural-language-understanding/3464cdba-a428-4934-945e-3dfd87d4e49c/?paneId=credentials&new=true&env_id=ibm:yp:us-south&org=89ae7f05-90ac-4efa-a089-e0a83704a79e&space=24853127-1fa6-4544-9835-e230bed91e8e) and create "New credentials".
 
-    ![](doc/pictures/readme/2_newcredentials.png)
+    <img src="https://github.com/johannesharmse/watsonNLU/blob/master/doc/pictures/readme/2_newcredentials.png" width="450">
 
 4. Use these credentials as the username and password within the R wrapper authentication function {INSERT FUNCTION NAME HERE}
 
