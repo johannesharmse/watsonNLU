@@ -4,31 +4,37 @@
 \alias{text_categories}
 \title{Watson Natural Language Understanding: Text Categorizer}
 \usage{
-text_categories(text = NULL, url = NULL)
+text_categories(username = NULL, password = NULL, input = NULL,
+  input_type = NULL, limit = NULL, version = "?version=2018-03-16")
 }
 \arguments{
-\item{text}{text string to be categorized.
+\item{username}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}}
+
+\item{password}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}}
+
+\item{input}{Either a text string input or website URL.
 Either \code{text} or \code{url} argument has to be specified,
 but not both.}
 
-\item{url}{url to text to be categorized.
+\item{input_type}{Specify what type of input was entered.
 Either \code{text} or \code{url} argument has to be specified,
 but not both.}
+
+\item{limit}{The number of categories to return.}
+
+\item{version}{The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}}
 }
 \value{
 A dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
 }
 \description{
-The \strong{text_categories} function takes in a URL or text input, and returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
-}
-\details{
-See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{text_categories} documentation for more useage cases.
+See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{text_categories} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API. The user then enters the text input or URL of their choice, along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{text_categories} documentation for more useage cases.
 }
 \examples{
-# Find the likelihood that the given input belongs to a particular category: from text
-text_categories(text = 'This is a great API wrapper')
+# Find the likelihood that the given input belongs to a particular category, from a text input.
+text_categories(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'This is a great API wrapper', input_type='text', limit = 10)
 
-# Find the likelihood that the given input belongs to a particular category: from URL
-text_categories(url = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/')
+# Find the likelihood that the given input belongs to a particular category, from a URL input.
+text_categories(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/', input_type='url', limit = 10)
 
 }
