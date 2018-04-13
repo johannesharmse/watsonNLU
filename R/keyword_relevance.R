@@ -25,7 +25,7 @@
 #'
 #' @export
 
-keyword_relevance <-  function(text = NULL, url = NULL){
+keyword_relevance <-  function(username = NULL, password = NULL, text_source = NULL, source_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
   # initialization
 
