@@ -25,11 +25,11 @@
 #'
 #' @export
 
-text_categories <-  function(username = NULL, password = NULL, text_source = NULL, source_type = NULL, limit = NULL, version="?version=2018-03-16"){
+text_categories <-  function(username = NULL, password = NULL, input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
   # initialization
 
-  accepted_source_types <- c('text', 'url')
+  accepted_input_types <- c('text', 'url')
 
   # api URL
   # this is the base of the API call
@@ -44,26 +44,26 @@ text_categories <-  function(username = NULL, password = NULL, text_source = NUL
 
   # input argument error checking
 
-  if (is.null(text_source)){
-    stop("Please specify a text source to analyze.")
-  }else if(!is.character(text_source)){
-    stop("Please specify text or URL as a character string")
+  if (is.null(input)){
+    stop("Please specify an input to analyze.")
+  }else if(!is.character(input)){
+    stop("Please specify input text or URL as a character string")
   }
 
-  if (is.null(source_type)){
-    message("Source type not specified. Assuming text input.")
-    source_type <- 'text'
+  if (is.null(input_type)){
+    message("Input type not specified. Assuming text input.")
+    input_type <- 'text'
   }
 
-  if (!is.character(source_type)){
-    stop("Source type needs to be specified as a character string('url' or 'text').")
+  if (!is.character(input_type)){
+    stop("Input type needs to be specified as a character string('url' or 'text').")
   }else{
-    source_type <- tolower(source_type)
+    input_type <- tolower(input_type)
   }
 
 
-  if (!source_type %in% accepted_source_types){
-    stop("Source type should be either 'url' or 'text'.")
+  if (!input_type %in% accepted_input_types){
+    stop("Input type should be either 'url' or 'text'.")
   }
 
   if(is.null(limit)){
@@ -83,8 +83,8 @@ text_categories <-  function(username = NULL, password = NULL, text_source = NUL
   # the text needs to be encoded
   # in the case of url input
   # no encoding is necessary
-  if (source_type == 'text'){
-    text_source <- URLencode(text_source)
+  if (input_type == 'text'){
+    input <- URLencode(input)
   }
 
   ### STANDARDISE INPUT ###
@@ -94,10 +94,10 @@ text_categories <-  function(username = NULL, password = NULL, text_source = NUL
   # variable
   # the pre-text is necessary
   # for the API call
-  if (source_type == 'text'){
-    input <- paste0("&text=", text_source)
-  }else if(source_type == 'url'){
-    input <- paste0("&url=", text_source)
+  if (input_type == 'text'){
+    input <- paste0("&text=", input)
+  }else if(input_type == 'url'){
+    input <- paste0("&url=", input)
   }
 
 
