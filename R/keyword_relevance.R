@@ -1,25 +1,26 @@
 #' Watson Natural Language Understanding: Relevance of Keywords
 #'
-#' The \strong{keyword_relevance} function takes in a URL or text input, and returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input.
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API. The user then enters the text input or URL of their choice, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
 #'
-#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
-#'
-#'
-#' @param text text string to be categorized.
+#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}
+#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}
+#' @param input Either a text string input or website URL.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
-#' @param url url to text to be categorized.
+#' @param input_type Specify what type of input was entered.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
+#' @param limit The number of keywords to return.
+#' @param version The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}
 #'
-#' @return A dataframe that contains keywords and their likelihood of being a keyword, for the given input.
+#' @return A dataframe containing a list of keywords and their corresponding likelihoods for the given input.
 #'
 #' @examples
-#' # Find the likelihood that a word is a keyword from the given input: text input
-#' keyword_relevance(text = 'This is a great API wrapper')
+#' # Find keywords and their corresponding likelihoods for a text input.
+#' keyword_relevance(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'This is a great API wrapper', input_type='text', limit = 10)
 #'
-#' # Find the likelihood that a word is a keyword from the given input: URL input
-#' keyword_relevance(url = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/')
+#' # Find keywords and their corresponding likelihoods for a URL input.
+#' keyword_relevance(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/', input_type='url', limit = 10)
 #'
 #' @import httr
 #'
