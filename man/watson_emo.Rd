@@ -19,22 +19,10 @@ but not both.}
 \item{limit}{The number of emotions to return.}
 
 \item{version}{The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}}
-
-\item{username}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}}
-
-\item{password}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}}
 }
 \value{
 A dataframe that contains the likelihood that the contents of the URL or text belong to a particular emotion.
 }
 \description{
 See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{watson_emo} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API. The user then enters the text input or URL of their choice, along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text is of a particular emotion. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{watson_emo} documentation for more useage cases.
-}
-\examples{
-# Find the likelihood that the given input belongs to a particular emotion, from a text input.
-watson_emo(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'This is a great API wrapper', input_type='text', limit = 10)
-
-# Find the likelihood that the given input belongs to a particular emotion, from a URL input.
-watson_emo(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/', input_type='url', limit = 10)
-
 }
