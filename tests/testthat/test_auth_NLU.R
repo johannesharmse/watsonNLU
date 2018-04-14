@@ -6,8 +6,9 @@
 library(watsonNLU)
 context("Keyword Relevance")
 
-credentials <- readRDS("credentials.rds")
+username <- readRDS("username.rds")
+password <- readRDS("password.rds")
 
 test_that("Check if authorization works.", {
-  expect_equal(auth_NLU(username = credentials$username, password = credentials$password), "Valid credentials provided.")
+  expect_equal(auth_NLU(username = username, password = password), "Valid credentials provided.")
 })
