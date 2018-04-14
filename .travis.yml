@@ -1,0 +1,11 @@
+language: R
+sudo: false
+cache: packages
+warnings_are_errors: false
+r:
+- release
+before_install:
+- openssl aes-256-cbc -K $encrypted_d5f87cdb00a6_key -iv $encrypted_d5f87cdb00a6_iv
+  -in tests/testthat/password.rds.enc -out tests/testthat/password.rds -d
+- openssl aes-256-cbc -K $encrypted_d5f87cdb00a6_key -iv $encrypted_d5f87cdb00a6_iv
+  -in tests/testthat/username.rds.enc -out tests/testthat/username.rds -d
