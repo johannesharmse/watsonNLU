@@ -26,7 +26,7 @@
 #'
 #' @export
 
-text_categories <-  function(username = NULL, password = NULL, input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
+text_categories <-  function(input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
   # initialization
 
@@ -114,7 +114,7 @@ text_categories <-  function(username = NULL, password = NULL, input = NULL, inp
   # feature_attr - string containing all specified attributes for specific features
   # authenticate - used to verify credentials
   # add_header - fails if not specified
-  response <- tryCatch({test = GET(url=paste0(
+  response <- GET(url=paste0(
     url_NLU,
     "/v1/analyze",
     version,
@@ -122,11 +122,7 @@ text_categories <-  function(username = NULL, password = NULL, input = NULL, inp
     features_string,
     limit),
     # authenticate(username,password),
-    add_headers("Content-Type"="application/json")
-    )
-
-
-    }, error = warning("Make sure you have provided valid credentials using auth_NLU()."))
+    add_headers("Content-Type"="application/json"))
 
   ### ERROR CHECKING ###
 
@@ -134,11 +130,16 @@ text_categories <-  function(username = NULL, password = NULL, input = NULL, inp
   # successful response has a code of 200
   # all other codes are unsuccessful responses
   if (status_code(response) != 200){
+
+    message(response)
+
+    if(status == 401){
+      stop("Invalid credentials provided. Provide valid credentials using watsonNLU::auth_NLU")
+    }
     # include message to give user more insight into why the call was unsuccessful
     # can be due to query limit, internet connection, authentication fail, etc.
-    message(response)
-    stop("Please make sure your username and password combination is correct
-         and that you have a valid internet connection or check the response log above.")
+
+    stop("Please make sure you have a valid internet connection and provided a valid input. Check the response log above for further details.")
   }
 
   ### API RESPONSE CONTENT ###
