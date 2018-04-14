@@ -21,8 +21,3 @@ The \strong{auth_NLU} function takes in a username and password as input to auth
 \details{
 See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API.
 }
-\examples{
-# Find username and password under service credentials
-auth_NLU(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX')
-
-}
