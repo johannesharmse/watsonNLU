@@ -4,12 +4,13 @@
 #'
 #'
 #' @param input A text input or URL of a website
-#' @param input_type The type of input. It can either be `text` or `url`, but not both. 
+#' @param input_type The type of input. It can either be `text` or `url`, but not both.
 #'
 #' @param version The release date of the API version to use.
 #' @return A dataframe with keywords and likelihood of emotions related to those keywords found in the text or URL.
 #'
-#' @examples
+#' # @examples
+#'
 #' # Find the keywords and related emotions in the given text input. By default it takes version = 2018-03-16
 #' keyword_sentiment(input = 'This is a great API wrapper', input_type='text')
 #'
@@ -20,33 +21,33 @@
 #'
 #' @export
 
-keyword_sentiment <-  function(input = NULL, 
-                        input_type = NULL, 
+keyword_sentiment <-  function(input = NULL,
+                        input_type = NULL,
                         version="?version=2018-03-16"){
-  
+
   # specfying accepted input types
   accepted_input_types <- c('text', 'url')
-  
+
   url_NLU <- "https://gateway.watsonplatform.net/natural-language-understanding/api"
-  
+
   # We will be extracting emotions of keyword features in our API
   feature_string <- paste0("&features=", "keywords")
   sentiment_string <- paste0("&keywords.sentiment=true")
-  
+
   # CHECK if input_type is specified or not. By default use URL.
   if (is.null(input_type)){
     message("Input type not specified. Please make sure to specify `url` in `input_type` if input is URL. Assuming text input.")
     input_type <- 'text'
   }
-  
+
   # CHECK if Input-type is character.
   if (!is.character(input_type)){
     stop("Input type needs to be specified as a character string('url' or 'text').")
   }else{
     input_type <- tolower(input_type)
   }
-  
-  
+
+
   # CHECK if input is text or url and modify input string.
   if (input_type == 'text'){
     input <- URLencode(input)
@@ -54,12 +55,12 @@ keyword_sentiment <-  function(input = NULL,
   }else if(input_type == 'url'){
     input_string <- paste0("&url=", input)
   }
-  
+
   # CHECK if input type is within acceptable values.
   if (!input_type %in% accepted_input_types){
     stop("Input type should be either 'url' or 'text'.")
   }
-  
+
   # Building the GET query.
   response_json <- GET(
     url = paste0(
@@ -73,17 +74,17 @@ keyword_sentiment <-  function(input = NULL,
     # authenticate(username, password),
     add_headers("Content=Type"="application/json")
   )
-  
+
   ###### CHECK RESPONSE ########
-  
+
   if (status_code(response_json) != 200){
-    
+
     # Include error message returned from the API call.
     message(response_json)
     stop("Please make sure your username and password combination is correct
          and that you have a valid internet connection or check the response log above.")
   }
-  
+
   # Save response as a list
   response_list <- content(response_json)
 
@@ -111,7 +112,7 @@ keyword_sentiment <-  function(input = NULL,
     'score' = sentiment_score,
     'label' = label
   )
-  
+
   # Return a DataFrame of sentiment score and labels of the keywords found in the text/url.
   return(response_df)
   }

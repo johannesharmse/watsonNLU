@@ -16,15 +16,15 @@ keyword_sentiment(input = NULL, input_type = NULL,
 }
 \value{
 A dataframe with keywords and likelihood of emotions related to those keywords found in the text or URL.
-}
-\description{
-See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
-}
-\examples{
+
+# @examples
+
 # Find the keywords and related emotions in the given text input. By default it takes version = 2018-03-16
 keyword_sentiment(input = 'This is a great API wrapper', input_type='text')
 
 # Find the keywords and related emotions in the given URL input. By default it takes version = 2018-03-16
 keyword_sentiment(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url')
-
+}
+\description{
+See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
 }

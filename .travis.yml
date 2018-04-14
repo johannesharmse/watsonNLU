@@ -4,9 +4,6 @@ cache: packages
 warnings_are_errors: false
 r:
 - release
-script:
-   - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_pull_requests; fi'
-   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
 before_install:
 - openssl aes-256-cbc -K $encrypted_f08928906bbd_key -iv $encrypted_f08928906bbd_iv
   -in tests/testthat/credentials.rds.enc -out tests/testthat/credentials.rds -d
