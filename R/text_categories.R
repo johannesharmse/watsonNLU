@@ -26,7 +26,7 @@
 #'
 #' @export
 
-text_categories <-  function(username = NULL, password = NULL, input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
+text_categories <-  function(input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
   # initialization
 
@@ -121,21 +121,29 @@ text_categories <-  function(username = NULL, password = NULL, input = NULL, inp
     input,
     features_string,
     limit),
-    authenticate(username,password),
-    add_headers("Content-Type"="application/json")
-    )
+    # authenticate(username,password),
+    add_headers("Content-Type"="application/json"))
 
   ### ERROR CHECKING ###
 
   # check for successful response
   # successful response has a code of 200
   # all other codes are unsuccessful responses
-  if (status_code(response) != 200){
+
+
+  status <- status_code(response)
+
+  if (status != 200){
+
+    message(response)
+
+    if(status == 401){
+      stop("Invalid or expired credentials provided. Provide credentials using watsonNLU::auth_NLU")
+    }
     # include message to give user more insight into why the call was unsuccessful
     # can be due to query limit, internet connection, authentication fail, etc.
-    message(response)
-    stop("Please make sure your username and password combination is correct
-         and that you have a valid internet connection or check the response log above.")
+
+    stop("Please make sure you have a valid internet connection and provided a valid input. Check the response log above for further details.")
   }
 
   ### API RESPONSE CONTENT ###
@@ -152,7 +160,8 @@ text_categories <-  function(username = NULL, password = NULL, input = NULL, inp
   # this needs to be removed
   # this can include things like input text metadata
 
-  if (!is.null(response$categories)){
+  if (!is.null(response$categories) &&
+      length(response$categories) > 0){
     response <- response$categories
   }else{
     stop("No results available")

@@ -121,7 +121,7 @@ keyword_relevance <-  function(username = NULL, password = NULL, input = NULL, i
     input,
     features_string,
     limit),
-    authenticate(username,password),
+    # authenticate(username,password),
     add_headers("Content-Type"="application/json")
     )
 
@@ -130,12 +130,20 @@ keyword_relevance <-  function(username = NULL, password = NULL, input = NULL, i
   # check for successful response
   # successful response has a code of 200
   # all other codes are unsuccessful responses
-  if (status_code(response) != 200){
+
+  status <- status_code(response)
+
+  if (status != 200){
+
+    message(response)
+
+    if(status == 401){
+      stop("Invalid or expired credentials provided. Provide credentials using watsonNLU::auth_NLU")
+    }
     # include message to give user more insight into why the call was unsuccessful
     # can be due to query limit, internet connection, authentication fail, etc.
-    message(response)
-    stop("Please make sure your username and password combination is correct
-         and that you have a valid internet connection or check the response log above.")
+
+    stop("Please make sure you have a valid internet connection and provided a valid input. Check the response log above for further details.")
   }
 
   ### API RESPONSE CONTENT ###
@@ -152,7 +160,8 @@ keyword_relevance <-  function(username = NULL, password = NULL, input = NULL, i
   # this needs to be removed
   # this can include things like input text metadata
 
-  if (!is.null(response$keywords)){
+  if (!is.null(response$keywords) &&
+      length(response$keywords) > 0){
     response <- response$keywords
   }else{
     stop("No results available")
