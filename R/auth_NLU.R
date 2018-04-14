@@ -23,22 +23,22 @@ auth_NLU <- function(username = NULL, password=NULL){
       !is.character(password)){
     stop("Please specify a valid username and password combination as string arguments.")
   }
-  # base login url
-  url_NLU = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze"
-  
-  response <- GET(url=paste0(url_NLU),
-                  authenticate(username, password),
-                  add_headers("Content-Type"="application/json")
-  )
-  
-  status <- status_code(response)
-  
-  if (status == 400){
-    return(print("Valid credentials provided."))
-  }else if(status == 401){
-    stop("Invalid credentials provided.")
-  }else{
-    stop(content(response))
-  }
+    # base login url
+    url_NLU = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze"
+
+    response <- GET(url=paste0(url_NLU),
+         authenticate(username, password),
+         add_headers("Content-Type"="application/json")
+         )
+
+    status <- status_code(response)
+
+    if (status == 400){
+      return(print("Valid credentials provided."))
+    }else if(status == 401){
+      stop("Invalid credentials provided.")
+    }else{
+      stop(content(response))
+    }
 }
 
