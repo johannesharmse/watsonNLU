@@ -4,14 +4,10 @@
 \alias{text_categories}
 \title{Watson Natural Language Understanding: Text Categorizer}
 \usage{
-text_categories(username = NULL, password = NULL, input = NULL,
-  input_type = NULL, limit = NULL, version = "?version=2018-03-16")
+text_categories(input = NULL, input_type = NULL, limit = NULL,
+  version = "?version=2018-03-16")
 }
 \arguments{
-\item{username}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}}
-
-\item{password}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}}
-
 \item{input}{Either a text string input or website URL.
 Either \code{text} or \code{url} argument has to be specified,
 but not both.}
@@ -23,6 +19,10 @@ but not both.}
 \item{limit}{The number of categories to return.}
 
 \item{version}{The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}}
+
+\item{username}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}}
+
+\item{password}{Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}}
 }
 \value{
 A dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
