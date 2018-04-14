@@ -138,7 +138,7 @@ keyword_relevance <-  function(username = NULL, password = NULL, input = NULL, i
     message(response)
 
     if(status == 401){
-      stop("Invalid credentials provided. Provide valid credentials using watsonNLU::auth_NLU")
+      stop("Invalid or expired credentials provided. Provide credentials using watsonNLU::auth_NLU")
     }
     # include message to give user more insight into why the call was unsuccessful
     # can be due to query limit, internet connection, authentication fail, etc.
@@ -160,7 +160,8 @@ keyword_relevance <-  function(username = NULL, password = NULL, input = NULL, i
   # this needs to be removed
   # this can include things like input text metadata
 
-  if (!is.null(response$keywords)){
+  if (!is.null(response$keywords) &&
+      length(response$keywords) > 0){
     response <- response$keywords
   }else{
     stop("No results available")

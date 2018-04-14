@@ -28,9 +28,9 @@ auth_NLU <- function(username = NULL, password=NULL){
     stop("Please specify a valid username and password combination as string arguments.")
   }
     # base login url
-    url_NLU="https://gateway.watsonplatform.net/natural-language-understanding/api"
+    # url_NLU="https://gateway.watsonplatform.net/natural-language-understanding/api"
     # or try this:
-    # url_NLU = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze"
+    url_NLU = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze"
     # url_NLU="https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2017-02-27"
 
 

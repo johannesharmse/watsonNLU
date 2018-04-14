@@ -130,6 +130,7 @@ text_categories <-  function(input = NULL, input_type = NULL, limit = NULL, vers
   # successful response has a code of 200
   # all other codes are unsuccessful responses
 
+
   status <- status_code(response)
 
   if (status != 200){
@@ -137,7 +138,7 @@ text_categories <-  function(input = NULL, input_type = NULL, limit = NULL, vers
     message(response)
 
     if(status == 401){
-      stop("Invalid credentials provided. Provide valid credentials using watsonNLU::auth_NLU")
+      stop("Invalid or expired credentials provided. Provide credentials using watsonNLU::auth_NLU")
     }
     # include message to give user more insight into why the call was unsuccessful
     # can be due to query limit, internet connection, authentication fail, etc.
@@ -159,7 +160,8 @@ text_categories <-  function(input = NULL, input_type = NULL, limit = NULL, vers
   # this needs to be removed
   # this can include things like input text metadata
 
-  if (!is.null(response$categories)){
+  if (!is.null(response$categories) &&
+      length(response$categories) > 0){
     response <- response$categories
   }else{
     stop("No results available")
