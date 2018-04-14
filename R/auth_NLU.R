@@ -11,10 +11,6 @@
 #' @return If authentication is successful, there is no return value. If unsuccessful,
 #'    the function will ask the user to ensure username and password combination are correct.
 #'
-#' @examples
-#' # Find username and password under service credentials
-#' auth_NLU(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX')
-#'
 #' @import httr
 #'
 #' @export

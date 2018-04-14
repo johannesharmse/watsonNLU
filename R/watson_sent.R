@@ -2,8 +2,6 @@
 #'
 #' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{watson_sent} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API. The user then enters the text input or URL of their choice, along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular sentiment. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{watson_sent} documentation for more useage cases.
 #'
-#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}
-#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}
 #' @param input Either a text string input or website URL.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
@@ -14,13 +12,6 @@
 #' @param version The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}
 #'
 #' @return A dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
-#'
-#' @examples
-#' # Find the likelihood that the given input belongs to a particular sentiment, from a text input.
-#' watson_sent(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'This is a great API wrapper', input_type='text', limit = 10)
-#'
-#' # Find the likelihood that the given input belongs to a particular sentiment, from a URL input.
-#' watson_sent(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/', input_type='url', limit = 10)
 #'
 #' @import httr
 #'

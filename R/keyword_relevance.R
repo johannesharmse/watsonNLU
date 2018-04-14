@@ -2,8 +2,6 @@
 #'
 #' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API. The user then enters the text input or URL of their choice, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
 #'
-#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}
-#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}
 #' @param input Either a text string input or website URL.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
@@ -15,18 +13,11 @@
 #'
 #' @return A dataframe containing a list of keywords and their corresponding likelihoods for the given input.
 #'
-#' @examples
-#' # Find keywords and their corresponding likelihoods for a text input.
-#' keyword_relevance(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'This is a great API wrapper', input_type='text', limit = 10)
-#'
-#' # Find keywords and their corresponding likelihoods for a URL input.
-#' keyword_relevance(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/', input_type='url', limit = 10)
-#'
 #' @import httr
 #'
 #' @export
 
-keyword_relevance <-  function(username = NULL, password = NULL, input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
+keyword_relevance <-  function(input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
   # initialization
 
