@@ -130,7 +130,10 @@ keyword_relevance <-  function(username = NULL, password = NULL, input = NULL, i
   # check for successful response
   # successful response has a code of 200
   # all other codes are unsuccessful responses
-  if (status_code(response) != 200){
+
+  status <- status_code(response)
+
+  if (status != 200){
 
     message(response)
 
