@@ -24,6 +24,9 @@ vignettes/*.pdf
 
 # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
 .httr-oauth
+tests/testthat/username.rds
+tests/testthat/password.rds
+tests/testthat/credentials.rds
 
 # knitr and R markdown default cache directories
 /*_cache/

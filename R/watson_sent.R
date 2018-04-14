@@ -1,6 +1,6 @@
-#' Watson Natural Language Understanding: Relevance of Keywords
+#' Watson Natural Language Understanding: Sentiment Analysis
 #'
-#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API. The user then enters the text input or URL of their choice, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{watson_sent} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API. The user then enters the text input or URL of their choice, along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular sentiment. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{watson_sent} documentation for more useage cases.
 #'
 #' @param input Either a text string input or website URL.
 #'    Either \code{text} or \code{url} argument has to be specified,
@@ -8,16 +8,16 @@
 #' @param input_type Specify what type of input was entered.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
-#' @param limit The number of keywords to return.
+#' @param limit The number of sentiments to return.
 #' @param version The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}
 #'
-#' @return A dataframe containing a list of keywords and their corresponding likelihoods for the given input.
+#' @return A dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
 #'
 #' @import httr
 #'
 #' @export
 
-keyword_relevance <-  function(input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
+watson_sent <-  function(input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
   # initialization
 
@@ -30,7 +30,7 @@ keyword_relevance <-  function(input = NULL, input_type = NULL, limit = NULL, ve
 
   # function feature
   # no attribute needs to be specified
-  feauture <- "keywords"
+  feauture <- "categories"
   features_string <- paste0("&features=", feauture)
 
 
@@ -113,14 +113,14 @@ keyword_relevance <-  function(input = NULL, input_type = NULL, limit = NULL, ve
     features_string,
     limit),
     # authenticate(username,password),
-    add_headers("Content-Type"="application/json")
-    )
+    add_headers("Content-Type"="application/json"))
 
   ### ERROR CHECKING ###
 
   # check for successful response
   # successful response has a code of 200
   # all other codes are unsuccessful responses
+
 
   status <- status_code(response)
 
@@ -151,18 +151,29 @@ keyword_relevance <-  function(input = NULL, input_type = NULL, limit = NULL, ve
   # this needs to be removed
   # this can include things like input text metadata
 
-  if (!is.null(response$keywords) &&
-      length(response$keywords) > 0){
-    response <- response$keywords
+  if (!is.null(response$categories) &&
+      length(response$categories) > 0){
+    response <- response$categories
   }else{
     stop("No results available")
   }
   ### OUTPUT ###
 
-  keywords <- sapply(1:length(response), function(x) response[[x]]$text)
-  relevance <- sapply(1:length(response), function(x) response[[x]]$relevance)
+  label <- sapply(1:length(response), function(x) response[[x]]$label)
 
-  response_df <- data.frame('keyword' = keywords, 'relevance' = relevance)
+  label_levels <- lapply(1:length(label), function(x) strsplit(substr(label[x], 2, nchar(label[x])), split = "/", fixed = T)[[1]])
+
+  max_level <- max(sapply(label_levels, function(x) length(x)))
+
+  score <- sapply(1:length(response), function(x) response[[x]]$score)
+
+  response_df <- data.frame('score' = score)
+
+  for (i in 1:length(label_levels)){
+    for (j in 1:length(label_levels[[i]])){
+      response_df[i , paste0('category_level_', j)] <- label_levels[[i]][j]
+    }
+  }
 
   # return clean output
   return(response_df)

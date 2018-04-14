@@ -2,8 +2,6 @@
 #'
 #' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{text_categories} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API. The user then enters the text input or URL of their choice, along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{text_categories} documentation for more useage cases.
 #'
-#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}
-#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}
 #' @param input Either a text string input or website URL.
 #'    Either \code{text} or \code{url} argument has to be specified,
 #'    but not both.
@@ -15,18 +13,11 @@
 #'
 #' @return A dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
 #'
-#' @examples
-#' # Find the likelihood that the given input belongs to a particular category, from a text input.
-#' text_categories(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'This is a great API wrapper', input_type='text', limit = 10)
-#'
-#' # Find the likelihood that the given input belongs to a particular category, from a URL input.
-#' text_categories(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'http://santiago.begueria.es/2010/10/generating-spatially-correlated-random-fields-with-r/', input_type='url', limit = 10)
-#'
 #' @import httr
 #'
 #' @export
 
-text_categories <-  function(username = NULL, password = NULL, input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
+text_categories <-  function(input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
 
   # initialization
 
@@ -121,21 +112,29 @@ text_categories <-  function(username = NULL, password = NULL, input = NULL, inp
     input,
     features_string,
     limit),
-    authenticate(username,password),
-    add_headers("Content-Type"="application/json")
-    )
+    # authenticate(username,password),
+    add_headers("Content-Type"="application/json"))
 
   ### ERROR CHECKING ###
 
   # check for successful response
   # successful response has a code of 200
   # all other codes are unsuccessful responses
-  if (status_code(response) != 200){
+
+
+  status <- status_code(response)
+
+  if (status != 200){
+
+    message(response)
+
+    if(status == 401){
+      stop("Invalid or expired credentials provided. Provide credentials using watsonNLU::auth_NLU")
+    }
     # include message to give user more insight into why the call was unsuccessful
     # can be due to query limit, internet connection, authentication fail, etc.
-    message(response)
-    stop("Please make sure your username and password combination is correct
-         and that you have a valid internet connection or check the response log above.")
+
+    stop("Please make sure you have a valid internet connection and provided a valid input. Check the response log above for further details.")
   }
 
   ### API RESPONSE CONTENT ###
@@ -152,7 +151,8 @@ text_categories <-  function(username = NULL, password = NULL, input = NULL, inp
   # this needs to be removed
   # this can include things like input text metadata
 
-  if (!is.null(response$categories)){
+  if (!is.null(response$categories) &&
+      length(response$categories) > 0){
     response <- response$categories
   }else{
     stop("No results available")
