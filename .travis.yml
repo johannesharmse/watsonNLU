@@ -1,9 +1,9 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
 language: R
 sudo: false
 cache: packages
 warnings_are_errors: false
-
 r:
 - release
+before_install:
+- openssl aes-256-cbc -K $encrypted_d5f87cdb00a6_key -iv $encrypted_d5f87cdb00a6_iv
+  -in credentials.rds.enc -out credentials.rds -d
