@@ -1,16 +1,8 @@
-#' Watson Natural Language Understanding: Keyword-Emotions Analyzer
+#' Watson Natural Language Understanding: Document Keyword-Emotions Analyzer
 #'
 #' See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
 #'
 #'
-#' @param text text string to be analyzed.
-#'    Either \code{text} or \code{url} argument has to be specified,
-#'    but not both.
-#' @param url url to text to be analyzed.
-#'    Either \code{text} or \code{url} argument has to be specified,
-#'    but not both.
-#' @param username Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{username}
-#' @param password Authenitcation IBM Watson Natural-Language-Understanding-3j \strong{password}
 #' @param input A text input or URL of a website
 #' @param input_type The type of input. It can either be `text` or `url` but not both.
 #'
@@ -19,18 +11,16 @@
 #'
 #' @examples
 #' # Find the keywords and related emotions in the given text input. By default it takes version = 2018-03-16
-#' keyword_emotions(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'This is a great API wrapper', input_type='text')
+#' keyword_emotions(input = 'This is a great API wrapper', input_type='text')
 #'
 #' # Find the keywords and related emotions in the given URL input. By default it takes version = 2018-03-16
-#' keyword_emotions(username = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', password= 'XXXXXXXXXXXX', input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url')
+#' keyword_emotions(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url')
 #'
 #' @import httr
 #'
 #' @export
 
-keyword_emotions <-  function(username = NULL, 
-                        password = NULL, 
-                        input = NULL, 
+keyword_emotions <-  function(input = NULL, 
                         input_type = NULL, 
                         version="?version=2018-03-16"){
   
@@ -65,6 +55,11 @@ keyword_emotions <-  function(username = NULL,
     input_string <- paste0("&url=", input)
   }
   
+  # CHECK if input type is within acceptable values.
+  if (!input_type %in% accepted_input_types){
+    stop("Input type should be either 'url' or 'text'.")
+  }
+  
   # Building the GET query.
   response_json <- GET(
     url = paste0(
@@ -75,7 +70,7 @@ keyword_emotions <-  function(username = NULL,
       feature_string,
       emotion_string
     ),
-    authenticate(username, password),
+    # authenticate(username, password),
     add_headers("Content=Type"="application/json")
   )
   
