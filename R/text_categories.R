@@ -114,16 +114,19 @@ text_categories <-  function(username = NULL, password = NULL, input = NULL, inp
   # feature_attr - string containing all specified attributes for specific features
   # authenticate - used to verify credentials
   # add_header - fails if not specified
-  response <- GET(url=paste0(
+  response <- tryCatch({test = GET(url=paste0(
     url_NLU,
     "/v1/analyze",
     version,
     input,
     features_string,
     limit),
-    authenticate(username,password),
+    # authenticate(username,password),
     add_headers("Content-Type"="application/json")
     )
+
+
+    }, error = warning("Make sure you have provided valid credentials using auth_NLU()."))
 
   ### ERROR CHECKING ###
 
