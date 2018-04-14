@@ -41,3 +41,4 @@ auth_NLU <- function(username = NULL, password=NULL){
     stop(content(response))
   }
 }
+
