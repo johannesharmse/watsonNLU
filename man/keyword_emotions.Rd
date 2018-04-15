@@ -2,29 +2,38 @@
 % Please edit documentation in R/keyword_emotions.R
 \name{keyword_emotions}
 \alias{keyword_emotions}
-\title{Watson Natural Language Understanding: Document Keyword-Emotions Analyzer}
+\title{Watson Natural Language Understanding: Emotion Analysis of Input Keywords}
 \usage{
 keyword_emotions(input = NULL, input_type = NULL,
   version = "?version=2018-03-16")
 }
 \arguments{
-\item{input}{A text input or URL of a website}
+\item{input}{Either a text string input or website URL.
+Either \code{text} or \code{url} argument has to be specified,
+but not both.}
 
-\item{input_type}{The type of input. It can either be `text` or `url` but not both.}
+\item{input_type}{Specify what type of input was entered.
+Either \code{text} or \code{url} argument has to be specified,
+but not both.}
 
-\item{version}{The release date of the API version to use.}
+\item{version}{The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}}
 }
 \value{
-A dataframe with keywords and likelihood of emotions related to those keywords found in the text or URL.
-
-# @examples
-
-# Find the keywords and related emotions in the given text input. By default it takes version = 2018-03-16
-keyword_emotions(input = 'This is a great API wrapper', input_type='text')
-
-# Find the keywords and related emotions in the given URL input. By default it takes version = 2018-03-16
-keyword_emotions(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url')
+Dataframe containing the emotions of the keywords extracted from the input, and the likelihood that the input is described by that emotion.
 }
 \description{
-See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
+See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{keyword_emotions} function takes a text or URL input, along with the input type. The function then returns a dataframe containing the emotions of the keywords extracted from the input, and the likelihood that the input is described by that emotion. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_emotions} documentation for more useage cases.
+}
+\examples{
+library(watsonNLU)
+
+# Authenticate using Watson NLU API Credentials
+auth_NLU(username="XXXX", password="XXXX")
+
+# Find the keywords and related emotions in the given text input.
+keyword_emotions(input = 'This is a great API wrapper', input_type='text')
+
+# Find the keywords and related emotions in the given URL input.
+keyword_emotions(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url')
+
 }
