@@ -1,0 +1,30 @@
+---
+title: "How to use watson_NLU?"
+author: "J. Harmse, T. Haley, S. Sethi, V. Mulholland"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    css: vignette.css
+vignette: >
+  %\VignetteIndexEntry{How to use watson_NLU?}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+## Demonstration of a basic workflow
+
+
+### Step 1: 
+
+### Step 2: 
+
+```{r, fig.width=7, fig.height=4}
+
+```
+
+
+## FAQ
+
+### 
+
+### 
