@@ -1,6 +1,6 @@
 #' Watson Natural Language Understanding: Relevance of Keywords
 #'
-#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API. The user then enters the text input or URL of their choice, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes a text or URL input, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
 #'
 #' @param input Either a text string input or website URL.
 #'    Either \code{text} or \code{url} argument has to be specified,
@@ -12,6 +12,18 @@
 #' @param version The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}
 #'
 #' @return A dataframe containing a list of keywords and their corresponding likelihoods for the given input.
+#'
+#' @examples
+#' library(watsonNLU)
+#'
+#' # Authenticate using Watson NLU API Credentials
+#' auth_NLU(username="XXXX", password="XXXX")
+#'
+#' # Top 5 keywords from the text input.
+#' keyword_relevance(input = 'This is a great API wrapper', input_type='text', limit = 5)
+#'
+#' # Top 5 keywords from the URL input.
+#' keyword_relevance(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url', limit = 5)
 #'
 #' @import httr
 #'
