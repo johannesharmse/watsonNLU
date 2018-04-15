@@ -57,7 +57,10 @@ Natural language processing analyses semantic features of the text while the Wat
 
 This section provides an overview of each of the functions. Please refer to <a href="#installation">Installation</a> for more usage details.
 
-More information and examples can be found in the [User Manual](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/user_manual.md) and the [Installation Manual](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/install_manual.md). 
+More information and examples can be found here:
+* [Installation Manual](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/install_manual.md)
+* [User Manual with Examples](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/user_manual.md)
+* [Vignette Manual](https://github.com/johannesharmse/watsonNLU/blob/master/doc/watsonNLU-manual.pdf)
 
 #### Authentication
 
@@ -107,7 +110,7 @@ keyword_relevance(input = IBMtext, input_type='text', limit = 5)
 keyword_relevance(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url', limit = 5)
 ```
 
-As we can see here, the keywords are locations and adventure related terms.
+The results here display keywords that are locations and adventure related terms.
 
 
 #### Category
@@ -177,7 +180,9 @@ ggplot(weighed_relevance, aes(x = emotion, y=mean.score, fill=emotion)) +
   theme(axis.text.x = element_text(angle = 25, hjust = 0.7, vjust = 0.8))
 ```
 
-![](doc/pictures/readme/5_emotions.png)
+
+<img src="https://github.com/johannesharmse/watsonNLU/blob/master/doc/pictures/readme/5_emotions.png" width="450">
+
 
 
 ```{r}
@@ -197,7 +202,8 @@ ggplot(emotions_long, aes(x = keyword, y=mean.score, fill=emotion)) +
   theme(axis.text.x = element_text(angle = 25, hjust = 0.7, vjust = 0.8))
 ```
 
-![](doc/pictures/readme/6_keyemotions.png)
+<img src="https://github.com/johannesharmse/watsonNLU/blob/master/doc/pictures/readme/6_keyemotions.png" width="450">
+
 
 ## Credits
 
