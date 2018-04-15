@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="J. Harmse, T. Haley, S. Sethi, V. Mulholland" />
+
+<meta name="date" content="2018-04-15" />
+
+<title>How to use watsonNLU?</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%0A%7D%0Apre%20%7B%0A%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">How to use watsonNLU?</h1>
+<h4 class="author"><em>J. Harmse, T. Haley, S. Sethi, V. Mulholland</em></h4>
+<h4 class="date"><em>2018-04-15</em></h4>
+
+
+
+<div id="document-requirements" class="section level3">
+<h3>Document Requirements</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(watsonNLU)</code></pre></div>
+<p>The steps below are only necessary for the authentication in this manual. No need to replicate.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># credentials saved locally </span>
+credentials &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;../tests/testthat/credentials.rds&quot;</span>)
+username &lt;-<span class="st"> </span>credentials<span class="op">$</span>username
+password &lt;-<span class="st"> </span>credentials<span class="op">$</span>password</code></pre></div>
+</div>
+<div id="key-features" class="section level2">
+<h2>Key Features</h2>
+<p>The <code>watsonNLU</code> R wrapper package integrates with the <strong>IBM Watson Natural Language Understanding</strong> service to produce a variety of outputs including:</p>
+<ul>
+<li>sentiment</li>
+<li>emotions</li>
+<li>categories</li>
+<li>relevance</li>
+</ul>
+<p>Natural language processing analyses semantic features of the text while the Watson API cleans the HTML content so that the information can be handled by the R wrapper to produce a neat data frame output for each of the functions.</p>
+<div id="package-functions" class="section level3">
+<h3>Package Functions</h3>
+<p>The following examples will help demonstrate the application of the NLU services through the use of a sample of text provided by IBM.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">IBMtext &lt;-<span class="st"> &quot;In the rugged Colorado Desert of California, there lies buried a treasure ship sailed there hundreds of years ago by either Viking or Spanish explorers. Some say this is legend; others insist it is fact. A few have even claimed to have seen the ship, its wooden remains poking through the sand like the skeleton of a prehistoric beast. Among those who say theyâ€™ve come close to the ship is small-town librarian Myrtle Botts. In 1933, she was hiking with her husband in the Anza-Borrego Desert, not far from the border with Mexico. It was early March, so the desert would have been in bloom, its washed-out yellows and grays beaten back by the riotous invasion of wildflowers. Those wildflowers were what brought the Bottses to the desert, and they ended up near a tiny settlement called Agua Caliente. Surrounding place names reflected the strangeness and severity of the land: Moonlight Canyon, Hellhole Canyon, Indian Gorge. Try Newsweek for only $1.25 per week To enter the desert is to succumb to the unknowable. One morning, a prospector appeared in the coupleâ€™s camp with news far more astonishing than a new species of desert flora: Heâ€™d found a ship lodged in the rocky face of Canebrake Canyon. The vessel was made of wood, and there was a serpentine figure carved into its prow. There were also impressions on its flanks where shields had been attachedâ€”all the hallmarks of a Viking craft. Recounting the episode later, Botts said she and her husband saw the ship but couldnâ€™t reach it, so they vowed to return the following day, better prepared for a rugged hike. That wasnâ€™t to be, because, several hours later, there was a 6.4 magnitude earthquake in the waters off Huntington Beach, in Southern California.&quot;</span></code></pre></div>
+<div id="authentication" class="section level4">
+<h4>Authentication</h4>
+<p>The authentication function will take the credentials generated <a href="https://console.bluemix.net/services/natural-language-understanding/3464cdba-a428-4934-945e-3dfd87d4e49c/?paneId=credentials&amp;new=true&amp;env_id=ibm:yp:us-south&amp;org=89ae7f05-90ac-4efa-a089-e0a83704a79e&amp;space=24853127-1fa6-4544-9835-e230bed91e8e">here</a> (you must be signed into your personal account).</p>
+<p>With the credentials provided by IBM, enter your username and password. This step should be performed at the begining of every new intance. The following arguments are populated in <code>auth_NLU</code>:</p>
+<table>
+<colgroup>
+<col width="13%"></col>
+<col width="86%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>username</td>
+<td>Authentication IBM Watson Natural-Language-Understanding-3jusername</td>
+</tr>
+<tr class="even">
+<td>password</td>
+<td>Authentication IBM Watson Natural-Language-Understanding-3jpassword</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Authenticate using Watson NLU API Credentials</span>
+<span class="kw">auth_NLU</span>(username, password)</code></pre></div>
+<pre><code>## [1] &quot;Valid credentials provided.&quot;</code></pre>
+<p>As credential expire, you will have to create new ones following the steps delineated in the <a href="install_manual.Rmd">Installation Manual</a>. Before you create new credentials, try re-running <code>auth_NLU</code>.</p>
+</div>
+<div id="sentiment" class="section level4">
+<h4>Sentiment</h4>
+<p>The keyword_sentiment function takes a text or URL input, along with the input type. The function then returns a dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment.</p>
+<table>
+<colgroup>
+<col width="10%"></col>
+<col width="89%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>input</td>
+<td>Either a text string input or website URL. Either text or url argument has to be specified, but not both.</td>
+</tr>
+<tr class="even">
+<td>input_type</td>
+<td>Specify what type of input was entered. Either text or urlargument has to be specified, but not both.</td>
+</tr>
+<tr class="odd">
+<td>version</td>
+<td>The release date of the API version to use. Default value is version=“?version=2018-03-16”</td>
+</tr>
+</tbody>
+</table>
+<div id="use-case" class="section level5">
+<h5>Use Case</h5>
+<p>Using the <code>keyword_sentiment</code> function is a useful tool for measuring the tone of a body of text. It could be used to assess the subjectivity of certain articles for instance by setting a threshold for neutral/objective text and comparing the polarization of articles on a similar topic.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Find the keywords and related sentiment score in the given text input.</span>
+sentiments &lt;-<span class="st"> </span><span class="kw">keyword_sentiment</span>(<span class="dt">input =</span> IBMtext, <span class="dt">input_type=</span><span class="st">'text'</span>)
+<span class="kw">head</span>(sentiments)</code></pre></div>
+<pre><code>##                  keyword key_relevance     score    label
+## 1 rugged Colorado Desert      0.976091 -0.246817 negative
+## 2 librarian Myrtle Botts      0.969207 -0.500747 negative
+## 3    Anza-Borrego Desert      0.702170  0.000000  neutral
+## 4       riotous invasion      0.698587  0.559545 positive
+## 5          treasure ship      0.695311  0.000000  neutral
+## 6       Moonlight Canyon      0.693246  0.313185 positive</code></pre>
+</div>
+</div>
+<div id="emotion" class="section level4">
+<h4>Emotion</h4>
+<p>The <code>keyword_emotions</code> function takes a text or URL input, along with the input type. The function then returns a dataframe containing the emotions of the keywords extracted from the input, and the likelihood that the input is described by that emotion.</p>
+<table>
+<colgroup>
+<col width="10%"></col>
+<col width="89%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>input</td>
+<td>Either a text string input or website URL. Either text or url argument has to be specified, but not both.</td>
+</tr>
+<tr class="even">
+<td>input_type</td>
+<td>Specify what type of input was entered. Either text or urlargument has to be specified, but not both.</td>
+</tr>
+<tr class="odd">
+<td>version</td>
+<td>The release date of the API version to use. Default value is version=“?version=2018-03-16”</td>
+</tr>
+</tbody>
+</table>
+<div id="use-case-1" class="section level5">
+<h5>Use Case</h5>
+<p>A standard example of a use case for <code>keyword_emotions</code> would be for expanding on the positive versus negative sentiments.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Find the keywords and related emotions in the given text input.</span>
+emotions &lt;-<span class="st"> </span><span class="kw">keyword_emotions</span>(<span class="dt">input =</span> IBMtext, <span class="dt">input_type=</span><span class="st">'text'</span>)
+<span class="kw">head</span>(emotions)</code></pre></div>
+<pre><code>##                  keyword key_relevance  sadness      joy     fear  disgust
+## 1 rugged Colorado Desert      0.976091 0.146294 0.221358 0.066544 0.076084
+## 2 librarian Myrtle Botts      0.969207 0.448906 0.407977 0.065132 0.016412
+## 3    Anza-Borrego Desert      0.702170 0.283731 0.281543 0.054903 0.138030
+## 4       riotous invasion      0.698587 0.257926 0.085886 0.286756 0.266443
+## 5          treasure ship      0.695311 0.468585 0.168619 0.029721 0.067962
+## 6       Moonlight Canyon      0.693246 0.132472 0.189404 0.080563 0.074394
+##      anger
+## 1 0.104871
+## 2 0.082902
+## 3 0.104731
+## 4 0.258685
+## 5 0.302241
+## 6 0.083085</code></pre>
+<p>The output provides a wealth of information that needs to be wrangled to display the highlights. We make use of the <code>dplyr</code> package to gather the emotions per keyword and display their score. This facilitates the plotting process with <code>ggplot2</code>. First off, let’s summarize the emotions of the whole document weighing each keyword’s emotions by its relevance:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(tidyr)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wrangle the keywords to display a mean score proportional to the relevance</span>
+weighed_relevance &lt;-<span class="st"> </span>emotions <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> emotion, <span class="dt">value =</span> score, sadness, joy, fear, disgust, anger) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(emotion) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean.score=</span> <span class="kw">mean</span>(score<span class="op">*</span>key_relevance)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean.score =</span> mean.score<span class="op">/</span><span class="kw">sum</span>(mean.score))
+
+<span class="co"># display the results</span>
+<span class="kw">ggplot</span>(weighed_relevance, <span class="kw">aes</span>(<span class="dt">x =</span> emotion, <span class="dt">y=</span>mean.score, <span class="dt">fill=</span>emotion)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">'identity'</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">'Emotions'</span>, <span class="dt">y =</span><span class="st">'Emotion Score'</span>, <span class="dt">title =</span> <span class="st">'Emotions of IBMtext'</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Word relevance weighed average&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="st">'Emotion'</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">25</span>, <span class="dt">hjust =</span> <span class="fl">0.7</span>, <span class="dt">vjust =</span> <span class="fl">0.8</span>)) </code></pre></div>
+<pre><code>## List of 1
+##  $ axis.text.x:List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0.7
+##   ..$ vjust        : num 0.8
+##   ..$ angle        : num 25
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi FALSE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
+##  - attr(*, &quot;complete&quot;)= logi FALSE
+##  - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># gather and summarize the data grouped by most relevant keywords</span>
+emotions_long &lt;-<span class="st"> </span>emotions <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(key_relevance)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>( <span class="dt">key =</span> emotion, <span class="dt">value =</span> score, sadness, joy, fear, disgust, anger) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(keyword, emotion) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(score)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean.score=</span><span class="kw">mean</span>(score))
+
+<span class="co"># display the 5 most relevant keywords and their emotion scores</span>
+<span class="kw">ggplot</span>(emotions_long, <span class="kw">aes</span>(<span class="dt">x =</span> keyword, <span class="dt">y=</span>mean.score, <span class="dt">fill=</span>emotion)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">'identity'</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">'5 Most Relevant Keywords'</span>, <span class="dt">y =</span><span class="st">'Emotion Score'</span>, <span class="dt">title =</span> <span class="st">'Emotions of IBMtext Keywords'</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Filtered for the 5 most relevant keyword&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="st">'Emotion'</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">25</span>, <span class="dt">hjust =</span> <span class="fl">0.7</span>, <span class="dt">vjust =</span> <span class="fl">0.8</span>)) </code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+</div>
+<div id="relevance" class="section level4">
+<h4>Relevance</h4>
+<p>The <code>keyword_relevance</code> function takes a text or URL input, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input.</p>
+<table>
+<colgroup>
+<col width="10%"></col>
+<col width="89%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>input</td>
+<td>Either a text string input or website URL. Either text or url argument has to be specified, but not both.</td>
+</tr>
+<tr class="even">
+<td>input_type</td>
+<td>Specify what type of input was entered. Either text or urlargument has to be specified, but not both.</td>
+</tr>
+<tr class="odd">
+<td>limit</td>
+<td>The number of categories to return.</td>
+</tr>
+<tr class="even">
+<td>version</td>
+<td>The release date of the API version to use. Default value is version=“?version=2018-03-16”</td>
+</tr>
+</tbody>
+</table>
+<div id="use-case-2" class="section level5">
+<h5>Use Case</h5>
+<p>Relevance of specific keywords can be useful for determining what are the most recurring and pertinent terms of a document. To facilitate use, the <code>limit</code> argument can be set to return up to a specific number of keywords.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Top 5 keywords from the text input.</span>
+<span class="kw">keyword_relevance</span>(<span class="dt">input =</span> IBMtext, <span class="dt">input_type=</span><span class="st">'text'</span>, <span class="dt">limit =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>##                  keyword relevance
+## 1 rugged Colorado Desert  0.976091
+## 2 librarian Myrtle Botts  0.969207
+## 3    Anza-Borrego Desert  0.702170
+## 4       riotous invasion  0.698587
+## 5          treasure ship  0.695311</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Top 5 keywords from the URL input.</span>
+<span class="kw">keyword_relevance</span>(<span class="dt">input =</span> <span class="st">'http://www.nytimes.com/guides/well/how-to-be-happy'</span>, <span class="dt">input_type=</span><span class="st">'url'</span>, <span class="dt">limit =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>##                      keyword relevance
+## 1                  happiness  0.962492
+## 2                     people  0.790289
+## 3     World Happiness Report  0.610324
+## 4               happier life  0.586591
+## 5 so-called happiness ladder  0.540760</code></pre>
+<p>As we can see here, the keywords are locations and adventure related terms.</p>
+</div>
+</div>
+<div id="category" class="section level4">
+<h4>Category</h4>
+<p>The <code>text_categories</code> function takes a text or URL input along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.</p>
+<table>
+<colgroup>
+<col width="10%"></col>
+<col width="89%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>input</td>
+<td>Either a text string input or website URL. Either text or url argument has to be specified, but not both.</td>
+</tr>
+<tr class="even">
+<td>input_type</td>
+<td>Specify what type of input was entered. Either text or urlargument has to be specified, but not both.</td>
+</tr>
+<tr class="odd">
+<td>version</td>
+<td>The release date of the API version to use. Default value is version=“?version=2018-03-16”</td>
+</tr>
+</tbody>
+</table>
+<div id="use-case-3" class="section level5">
+<h5>Use Case</h5>
+<p>User’s may be interested in gathering the general topics of a text or the contents of a site very quickly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Find 5 categories that describe the text input.</span>
+<span class="kw">text_categories</span>(<span class="dt">input =</span> IBMtext, <span class="dt">input_type=</span><span class="st">'text'</span>)</code></pre></div>
+<pre><code>##      score category_level_1     category_level_2
+## 1 0.480819  home and garden                 &lt;NA&gt;
+## 2 0.464129           travel tourist destinations
+## 3 0.360872          science              geology
+##             category_level_3 category_level_4
+## 1                       &lt;NA&gt;             &lt;NA&gt;
+## 2 mexico and central america             &lt;NA&gt;
+## 3                 seismology      earthquakes</code></pre>
+<p>The results will return a variable number of themes that can be drilled down into category levels. The hierarchy will go from general topics to more specific subject matter as the level number increases.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
