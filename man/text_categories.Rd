@@ -27,10 +27,13 @@ A dataframe that contains the likelihood that the contents of the URL or text be
 See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{text_categories} function takes a text or URL input along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{text_categories} documentation for more useage cases.
 }
 \examples{
-library(watsonNLU)
+
+credentials <- readRDS("../tests/testthat/credentials.rds")
+username <- credentials$username
+password <- credentials$password
 
 # Authenticate using Watson NLU API Credentials
-auth_NLU(username="XXXX", password="XXXX")
+auth_NLU(username, password)
 
 # Find 5 categories that describe the text input.
 text_categories(input = 'This is a great API wrapper', input_type='text', limit = 5)

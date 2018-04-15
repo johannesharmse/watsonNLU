@@ -14,7 +14,7 @@
 #'
 #' @examples
 #'
-#' credentials <- readRDS("credentials.rds")
+#' credentials <- readRDS("../tests/testthat/credentials.rds")
 #' username <- credentials$username
 #' password <- credentials$password
 #'
