@@ -10,10 +10,13 @@
 #'    the function will ask the user to ensure username and password combination are correct.
 #'
 #' @examples
-#' library(watsonNLU)
+#'
+#' credentials <- readRDS("credentials.rds")
+#' username <- credentials$username
+#' password <- credentials$password
 #'
 #' # Authenticate using Watson NLU API Credentials
-#' auth_NLU(username="XXXX", password="XXXX")
+#' auth_NLU(username, password)
 #'
 #' @seealso \code{\link[watsonNLU]{keyword_sentiment}}, \code{\\link[watsonNLU]{keyword_relevance}}, \code{\\link[watsonNLU]{keyword_emotions}}, \code{\\link[watsonNLU]{text_categories}}
 #'

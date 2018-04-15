@@ -14,8 +14,13 @@
 #' @return A dataframe containing a list of keywords and their corresponding likelihoods for the given input.
 #'
 #' @examples
-#' library(watsonNLU)
 #'
+#' credentials <- readRDS("credentials.rds")
+#' username <- credentials$username
+#' password <- credentials$password
+#'
+#' # Authenticate using Watson NLU API Credentials
+#' auth_NLU(username, password)
 #' # Authenticate using Watson NLU API Credentials
 #' auth_NLU(username="XXXX", password="XXXX")
 #'
