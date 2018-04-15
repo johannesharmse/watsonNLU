@@ -3,13 +3,19 @@ title: "How to use watsonNLU?"
 author: "J. Harmse, T. Haley, S. Sethi, V. Mulholland"
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::html_vignette:
+  html_vignette:
     css: vignette.css
-vignette: >
-  %\VignetteIndexEntry{How to use watsonNLU?}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+    vignette: >
+      %\VignetteIndexEntry{How to use watsonNLU?}
+      %\VignetteEngine{knitr::rmarkdown}
+      \usepackage[utf8]{inputenc}
+  github_document: default
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 
 ### Document Requirements
 
