@@ -15,11 +15,11 @@ password <- credentials$password
 text_input <- readLines(con = "test.txt")
 url_input <- "http://www.nytimes.com/guides/well/how-to-be-happy"
 
-response_success <- keyword_relevance(input = text_input, input_type='text', limit = 3)
-response_success_url <- keyword_relevance(input = url_input, input_type='url', limit = 5)
-
 # authenticate user
 auth_NLU(username = username, password = password)
+
+response_success <- keyword_relevance(input = text_input, input_type='text', limit = 3)
+response_success_url <- keyword_relevance(input = url_input, input_type='url', limit = 5)
 
 test_that("Check error handling for missing input", {
 
