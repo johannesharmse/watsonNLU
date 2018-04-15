@@ -28,7 +28,7 @@ See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}
 }
 \examples{
 
-credentials <- readRDS("credentials.rds")
+credentials <- readRDS("../tests/testthat/credentials.rds")
 username <- credentials$username
 password <- credentials$password
 
