@@ -12,7 +12,7 @@
 #' @param version The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}
 #' @return Dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment.
 #'
-#' # @examples
+#' @examples
 #' library(watsonNLU)
 #'
 #' # Authenticate using Watson NLU API Credentials
@@ -23,6 +23,8 @@
 #'
 #' # Find the keywords and related emotions in the given URL input.
 #' keyword_sentiment(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url')
+#'
+#' @seealso \code{\link[watsonNLU]{text_categories}}, \code{\\link[watsonNLU]{keyword_relevance}}, \code{\\link[watsonNLU]{keyword_emotions}}, \code{\\link[watsonNLU]{auth_NLU}}
 #'
 #' @import httr
 #'

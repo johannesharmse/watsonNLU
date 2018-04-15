@@ -9,11 +9,14 @@
 #' @return If authentication is successful, there is no return value. If unsuccessful,
 #'    the function will ask the user to ensure username and password combination are correct.
 #'
-#' # @examples
+#' @examples
 #' library(watsonNLU)
 #'
 #' # Authenticate using Watson NLU API Credentials
 #' auth_NLU(username="XXXX", password="XXXX")
+#'
+#' @seealso \code{\link[watsonNLU]{keyword_sentiment}}, \code{\\link[watsonNLU]{keyword_relevance}}, \code{\\link[watsonNLU]{keyword_emotions}}, \code{\\link[watsonNLU]{text_categories}}
+#'
 #'
 #' @import httr
 #'

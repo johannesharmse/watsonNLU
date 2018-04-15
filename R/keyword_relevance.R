@@ -13,7 +13,7 @@
 #'
 #' @return A dataframe containing a list of keywords and their corresponding likelihoods for the given input.
 #'
-#' # @examples
+#' @examples
 #' library(watsonNLU)
 #'
 #' # Authenticate using Watson NLU API Credentials
@@ -24,6 +24,9 @@
 #'
 #' # Top 5 keywords from the URL input.
 #' keyword_relevance(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url', limit = 5)
+#'
+#' @seealso \code{\link[watsonNLU]{keyword_sentiment}}, \code{\\link[watsonNLU]{text_categories}}, \code{\\link[watsonNLU]{keyword_emotions}}, \code{\\link[watsonNLU]{auth_NLU}}
+#'
 #'
 #' @import httr
 #'

@@ -14,13 +14,17 @@ auth_NLU(username = NULL, password = NULL)
 \value{
 If authentication is successful, there is no return value. If unsuccessful,
    the function will ask the user to ensure username and password combination are correct.
-
-# @examples
+}
+\description{
+See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{auth_NLU} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API.
+}
+\examples{
 library(watsonNLU)
 
 # Authenticate using Watson NLU API Credentials
 auth_NLU(username="XXXX", password="XXXX")
+
 }
-\description{
-See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{auth_NLU} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API.
+\seealso{
+\code{\link[watsonNLU]{keyword_sentiment}}, \code{\\link[watsonNLU]{keyword_relevance}}, \code{\\link[watsonNLU]{keyword_emotions}}, \code{\\link[watsonNLU]{text_categories}}
 }

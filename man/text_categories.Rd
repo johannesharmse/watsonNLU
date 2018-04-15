@@ -22,8 +22,11 @@ but not both.}
 }
 \value{
 A dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
-
-# @examples
+}
+\description{
+See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{text_categories} function takes a text or URL input along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{text_categories} documentation for more useage cases.
+}
+\examples{
 library(watsonNLU)
 
 # Authenticate using Watson NLU API Credentials
@@ -34,7 +37,8 @@ text_categories(input = 'This is a great API wrapper', input_type='text', limit 
 
 # Find 5 categories that describe the URL input.
 text_categories(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url', limit = 5)
+
 }
-\description{
-See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{text_categories} function takes a text or URL input along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{text_categories} documentation for more useage cases.
+\seealso{
+\code{\link[watsonNLU]{keyword_sentiment}}, \code{\\link[watsonNLU]{keyword_relevance}}, \code{\\link[watsonNLU]{keyword_emotions}}, \code{\\link[watsonNLU]{auth_NLU}}
 }
