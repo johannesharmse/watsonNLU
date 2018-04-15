@@ -1,0 +1,112 @@
+---
+title: "How to use watson_NLU?"
+author: "J. Harmse, T. Haley, S. Sethi, V. Mulholland"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    css: vignette.css
+vignette: >
+  %\VignetteIndexEntry{How to use watson_NLU?}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+### Document Requirements
+
+```{r}
+library(watsonNLU)
+```
+
+
+The steps below are only necessary for the authentication in this manual. No need to replicate. 
+
+```{r}
+# credentials saved locally 
+credentials <- readRDS("../tests/testthat/credentials.rds")
+username <- credentials$username
+password <- credentials$password
+```
+
+
+## Key Features
+
+The `watsonNLU` R wrapper package integrates with the **IBM Watson Natural Language Understanding** service to produce a variety of outputs including:
+
+* sentiment
+* emotions
+* categories
+* relevance
+
+Natural language processing analyses semantic features of the text while the Watson API cleans the HTML content so that the information can be handled by the R wrapper to produce a neat data frame output for each of the functions. 
+
+
+
+
+### Package Functions
+
+The following examples will help demonstrate the application of the NLU services through the use of a sample of text provided by IBM.
+
+```{r}
+IBMtext <- "the ship Evans claimed to see was Spanish, not Norse. Others have also seen this vessel, but much farther south, in Baja California, Mexico. Like all great legends, the desert ship is immune to its contradictions: It is fake news for the romantic soul, offering passage into some ancient American dreamtime when blood and gold were the main currencies of civic life.The legend does seem, prima facie, bonkers: a craft loaded with untold riches, sailed by early-European explorers into a vast lake that once stretched over much of inland Southern California, then run aground, abandoned by its crew and covered over by centuries of sand and rock and creosote bush as that lake dried out…and now it lies a few feet below the surface, in sight of the chicken-wire fence at the back of the Desert Dunes motel, $58 a night and HBO in most rooms.Totally insane, right? Let us slink back to our cubicles and never speak of the desert ship again. Let us only believe that which is shared with us on Facebook. Let us banish forever all traces of wonder from our lives. Yet there are believers who insist that, using recent advances in archaeology, the ship can be found. They point, for example, to a wooden sloop from the 1770s unearthed during excavations at the World Trade Center site in lower Manhattan, or the more than 40 ships, dating back perhaps 800 years, discovered in the Black Sea earlier this year."
+```
+
+
+#### Authentication
+
+The authentication function will take the credentials generated [here](https://console.bluemix.net/services/natural-language-understanding/3464cdba-a428-4934-945e-3dfd87d4e49c/?paneId=credentials&new=true&env_id=ibm:yp:us-south&org=89ae7f05-90ac-4efa-a089-e0a83704a79e&space=24853127-1fa6-4544-9835-e230bed91e8e) (you must be signed into your personal account).
+
+With the credentials provided by IBM, enter your username and password. This step should be performed at the begining of every new intance. The following arguments are populated in `auth_NLU`:
+
+| Argument | Description                                                         |
+|----------|---------------------------------------------------------------------|
+| username | Authentication IBM Watson Natural-Language-Understanding-3jusername |
+| password | Authentication IBM Watson Natural-Language-Understanding-3jpassword |
+
+```{r}
+# Authenticate using Watson NLU API Credentials
+auth_NLU(username, password)
+```
+
+As credential expire, you will have to create new ones following the steps delineated in the [Installation Manual](install_manual.Rmd).
+
+#### Sentiment
+
+keyword_relevance.Rd
+
+#### Emotion
+
+keyword_emotions.Rd
+
+
+#### Relevance
+
+keyword_relevance.Rd
+
+```{r}
+# Top 5 keywords from the text input.
+keyword_relevance(input = IBMtext, input_type='text', limit = 5)
+
+# Top 5 keywords from the URL input.
+keyword_relevance(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url', limit = 5)
+```
+
+
+
+#### Category
+
+text_categories.Rd
+
+### Step 1: 
+
+### Step 2: 
+
+```{r, fig.width=7, fig.height=4}
+
+```
+
+
+## FAQ
+
+### 
+
+### 
