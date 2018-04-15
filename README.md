@@ -107,7 +107,7 @@ keyword_relevance(input = IBMtext, input_type='text', limit = 5)
 keyword_relevance(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url', limit = 5)
 ```
 
-As we can see here, the keywords are locations and adventure related terms.
+The results here display keywords that are locations and adventure related terms.
 
 
 #### Category
@@ -177,7 +177,9 @@ ggplot(weighed_relevance, aes(x = emotion, y=mean.score, fill=emotion)) +
   theme(axis.text.x = element_text(angle = 25, hjust = 0.7, vjust = 0.8))
 ```
 
-![](doc/pictures/readme/5_emotions.png)
+
+<img src="https://github.com/johannesharmse/watsonNLU/blob/master/doc/pictures/readme/5_emotions.png" width="450">
+
 
 
 ```{r}
@@ -197,7 +199,8 @@ ggplot(emotions_long, aes(x = keyword, y=mean.score, fill=emotion)) +
   theme(axis.text.x = element_text(angle = 25, hjust = 0.7, vjust = 0.8))
 ```
 
-![](doc/pictures/readme/6_keyemotions.png)
+<img src="https://github.com/johannesharmse/watsonNLU/blob/master/doc/pictures/readme/6_keyemotions.png" width="450">
+
 
 ## Credits
 
