@@ -25,10 +25,13 @@ Dataframe containing the sentiments of the keywords extracted from the input, an
 See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{keyword_sentiment} function takes a text or URL input, along with the input type. The function then returns a dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_sentiment} documentation for more useage cases.
 }
 \examples{
-library(watsonNLU)
+
+credentials <- readRDS("credentials.rds")
+username <- credentials$username
+password <- credentials$password
 
 # Authenticate using Watson NLU API Credentials
-auth_NLU(username="XXXX", password="XXXX")
+auth_NLU(username, password)
 
 # Find the keywords and related emotions in the given text input.
 keyword_sentiment(input = 'This is a great API wrapper', input_type='text')

@@ -27,8 +27,13 @@ A dataframe containing a list of keywords and their corresponding likelihoods fo
 See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes a text or URL input, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
 }
 \examples{
-library(watsonNLU)
 
+credentials <- readRDS("credentials.rds")
+username <- credentials$username
+password <- credentials$password
+
+# Authenticate using Watson NLU API Credentials
+auth_NLU(username, password)
 # Authenticate using Watson NLU API Credentials
 auth_NLU(username="XXXX", password="XXXX")
 

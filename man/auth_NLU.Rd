@@ -19,10 +19,13 @@ If authentication is successful, there is no return value. If unsuccessful,
 See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{auth_NLU} function takes in a username and password as input to authenticate the users computer to use the Watson Natural Language Understanding API.
 }
 \examples{
-library(watsonNLU)
+
+credentials <- readRDS("credentials.rds")
+username <- credentials$username
+password <- credentials$password
 
 # Authenticate using Watson NLU API Credentials
-auth_NLU(username="XXXX", password="XXXX")
+auth_NLU(username, password)
 
 }
 \seealso{
