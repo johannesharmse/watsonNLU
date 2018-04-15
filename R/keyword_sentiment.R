@@ -1,6 +1,6 @@
 #' Watson Natural Language Understanding: Sentiment Analysis of Input Keywords
 #'
-#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{keyword_sentiment} function takes a text or URL input, along with the input type. The function then returns a dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_sentiment} documentation for more useage cases.
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{keyword_sentiment} function takes a text or URL input, along with the input type. The function then returns a dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_sentiment} documentation for more usage cases.
 #'
 #'
 #' @param input Either a text string input or website URL.
