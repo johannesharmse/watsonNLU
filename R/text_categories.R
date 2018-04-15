@@ -1,6 +1,6 @@
 #' Watson Natural Language Understanding: Text Categorizer
 #'
-#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{text_categories} function takes a text or URL input along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{text_categories} documentation for more useage cases.
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{text_categories} function takes a text or URL input along with the input type. The function then returns a dataframe that contains the likelihood that the contents of the URL or text belong to a particular category. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{text_categories} documentation for more usage cases.
 #'
 #' @param input Either a text string input or website URL.
 #'    Either \code{text} or \code{url} argument has to be specified,
@@ -23,10 +23,10 @@
 #' auth_NLU(username, password)
 #'
 #' # Find 5 categories that describe the text input.
-#' text_categories(input = 'This is a great API wrapper', input_type='text', limit = 5)
+#' text_categories(input = 'This is a great API wrapper', input_type='text')
 #'
 #' # Find 5 categories that describe the URL input.
-#' text_categories(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url', limit = 5)
+#' text_categories(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url')
 #'
 #' @seealso \code{\link[watsonNLU]{keyword_sentiment}}, \code{\\link[watsonNLU]{keyword_relevance}}, \code{\\link[watsonNLU]{keyword_emotions}}, \code{\\link[watsonNLU]{auth_NLU}}
 #'
@@ -34,7 +34,7 @@
 #'
 #' @export
 
-text_categories <-  function(input = NULL, input_type = NULL, limit = NULL, version="?version=2018-03-16"){
+text_categories <-  function(input = NULL, input_type = NULL, version="?version=2018-03-16"){
 
   # initialization
 
@@ -75,14 +75,14 @@ text_categories <-  function(input = NULL, input_type = NULL, limit = NULL, vers
     stop("Input type should be either 'url' or 'text'.")
   }
 
-  if(is.null(limit)){
-    message("No limit specified. Using default API call limit.")
-  }else if(!is.numeric(limit) ||
-           length(limit) > 1){
-    message("Limit needs to be specified as a numeric integer.")
-  }else{
-    limit <- paste0("&", feauture, ".limit=", limit)
-  }
+  # if(is.null(limit)){
+  #   message("No limit specified. Using default API call limit.")
+  # }else if(!is.numeric(limit) ||
+  #          length(limit) > 1){
+  #   message("Limit needs to be specified as a numeric integer.")
+  # }else{
+  #   limit <- paste0("&", feauture, ".limit=", limit)
+  # }
 
 
   ### ENCODING ###
@@ -127,8 +127,7 @@ text_categories <-  function(input = NULL, input_type = NULL, limit = NULL, vers
     "/v1/analyze",
     version,
     input,
-    features_string,
-    limit),
+    features_string),
     # authenticate(username,password),
     add_headers("Content-Type"="application/json"))
 

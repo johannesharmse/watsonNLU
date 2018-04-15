@@ -1,6 +1,6 @@
 #' Watson Natural Language Understanding: Relevance of Keywords
 #'
-#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes a text or URL input, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes a text or URL input, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more usage cases.
 #'
 #' @param input Either a text string input or website URL.
 #'    Either \code{text} or \code{url} argument has to be specified,
@@ -170,6 +170,15 @@ keyword_relevance <-  function(input = NULL, input_type = NULL, limit = NULL, ve
   # that the user isn't interested in
   # this needs to be removed
   # this can include things like input text metadata
+
+
+  ### ERROR HANDLING ###
+
+  # account for no results returned
+  # shouldn't ever reach this point
+  # since Watson will catch it if
+  # there isn't enough input text
+  # to identify keywords
 
   if (!is.null(response$keywords) &&
       length(response$keywords) > 0){
