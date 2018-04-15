@@ -1,21 +1,30 @@
-#' Watson Natural Language Understanding: Document Keyword-Sentiments Analyzer
+#' Watson Natural Language Understanding: Sentiment Analysis of Input Keywords
 #'
-#' See the \href{https://www.ibm.com/watson/developercloud/natural-language-understanding/api/v1/#get-analyze}{IBM Watson NLU API} documentation for more information.
+#' See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{keyword_sentiment} function takes a text or URL input, along with the input type. The function then returns a dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_sentiment} documentation for more useage cases.
 #'
 #'
-#' @param input A text input or URL of a website
-#' @param input_type The type of input. It can either be `text` or `url`, but not both.
+#' @param input Either a text string input or website URL.
+#'    Either \code{text} or \code{url} argument has to be specified,
+#'    but not both.
+#' @param input_type Specify what type of input was entered.
+#'    Either \code{text} or \code{url} argument has to be specified,
+#'    but not both.
+#' @param version The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}
+#' @return Dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment.
 #'
-#' @param version The release date of the API version to use.
-#' @return A dataframe with keywords and likelihood of emotions related to those keywords found in the text or URL.
+#' @examples
+#' library(watsonNLU)
 #'
-#' # @examples
+#' # Authenticate using Watson NLU API Credentials
+#' auth_NLU(username="XXXX", password="XXXX")
 #'
-#' # Find the keywords and related emotions in the given text input. By default it takes version = 2018-03-16
+#' # Find the keywords and related emotions in the given text input.
 #' keyword_sentiment(input = 'This is a great API wrapper', input_type='text')
 #'
-#' # Find the keywords and related emotions in the given URL input. By default it takes version = 2018-03-16
+#' # Find the keywords and related emotions in the given URL input.
 #' keyword_sentiment(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url')
+#'
+#' @seealso \code{\link[watsonNLU]{text_categories}}, \code{\\link[watsonNLU]{keyword_relevance}}, \code{\\link[watsonNLU]{keyword_emotions}}, \code{\\link[watsonNLU]{auth_NLU}}
 #'
 #' @import httr
 #'
