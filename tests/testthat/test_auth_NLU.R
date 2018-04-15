@@ -2,12 +2,11 @@
 #
 # Testing includes:
 #
+# - correct error handling
+# - correct function output for valid function input
 
 library(watsonNLU)
 context("Keyword Relevance")
-
-# username <- readRDS("username.rds")
-# password <- readRDS("password.rds")
 
 credentials <- readRDS("credentials.rds")
 username <- credentials$username

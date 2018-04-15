@@ -171,6 +171,15 @@ keyword_relevance <-  function(input = NULL, input_type = NULL, limit = NULL, ve
   # this needs to be removed
   # this can include things like input text metadata
 
+
+  ### ERROR HANDLING ###
+
+  # account for no results returned
+  # shouldn't ever reach this point
+  # since Watson will catch it if
+  # there isn't enough input text
+  # to identify keywords
+
   if (!is.null(response$keywords) &&
       length(response$keywords) > 0){
     response <- response$keywords
