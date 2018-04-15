@@ -57,20 +57,69 @@ Natural language processing analyses semantic features of the text while the Wat
 
 This section provides an overview of each of the functions. Please refer to <a href="#installation">Installation</a> for more usage details.
 
+More information and examples can be found in the [User Manual](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/user_manual.md) and the [Installation Manual](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/install_manual.md). 
+
 #### Authentication
 
 The authentication function will take the credentials generated [here](https://console.bluemix.net/services/natural-language-understanding/3464cdba-a428-4934-945e-3dfd87d4e49c/?paneId=credentials&new=true&env_id=ibm:yp:us-south&org=89ae7f05-90ac-4efa-a089-e0a83704a79e&space=24853127-1fa6-4544-9835-e230bed91e8e) (you must be signed into your account).
 
+```{r}
+# Authenticate using Watson NLU API Credentials
+auth_NLU(username, password)
+```
+
+As credential expire, you will have to create new ones following the steps delineated in the [Installation Manual](install_manual.Rmd). Before you create new credentials, try re-running `auth_NLU`.
+
 #### Sentiment
+
+Using the `keyword_sentiment` function is a useful tool for measuring the tone of a body of text. It could be used to assess the subjectivity of certain articles for instance by setting a threshold for neutral/objective text and comparing the polarization of articles on a similar topic.
+
+```{r}
+# Find the keywords and related sentiment score in the given text input.
+sentiments <- keyword_sentiment(input = IBMtext, input_type='text')
+head(sentiments)
+```
 
 
 #### Emotion
 
+A standard example of a use case for `keyword_emotions` would be for expanding on the positive versus negative sentiments.
+
+
+```{r}
+# Find the keywords and related emotions in the given text input.
+emotions <- keyword_emotions(input = IBMtext, input_type='text')
+head(emotions)
+```
+
 
 #### Relevance
 
+Relevance of specific keywords can be useful for determining what are the most recurring and pertinent terms of a document. To facilitate use, the `limit` argument can be set to return up to a specific number of keywords.
+
+```{r}
+# Top 5 keywords from the text input.
+keyword_relevance(input = IBMtext, input_type='text', limit = 5)
+```
+
+```{r}
+# Top 5 keywords from the URL input.
+keyword_relevance(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url', limit = 5)
+```
+
+As we can see here, the keywords are locations and adventure related terms.
+
+
 #### Category
 
+User's may be interested in gathering the general topics of a text or the contents of a site very quickly.
+
+```{r}
+# Find 5 categories that describe the text input.
+text_categories(input = IBMtext, input_type='text')
+```
+
+The results will return a variable number of themes that can be drilled down into category levels. The hierarchy will go from general topics to more specific subject matter as the level number increases.
 
 ## Installation
 
@@ -102,18 +151,53 @@ devtools::install_github("johannesharmse/watsonNLU")
 
 ### Example Workflow
 
-TO BE EDITED WITH ATOMIC FUNCTION WORKFLOW.
+The output provides a wealth of information that needs to be wrangled to display the highlights. We make use of the `dplyr` package to gather the emotions per keyword and display their score. This facilitates the plotting process with `ggplot2`. First off, let's summarize the emotions of the whole document weighing each keyword's emotions by its relevance:
 
-``` r
-#  original larger function
-## watson_NLU(text = NULL, url = NULL, username = NULL, password=NULL, features = list(), version="?version=2018-03-16")
-
-# example 1 -- leftist news
-leftemotions <- watson_NLU(text = NULL, url = 'http://money.cnn.com/2018/04/02/technology/pacific-newsletter/index.html', username = 'YOUR CREDENTIALS HERE', password='YOUR CREDENTIALS HERE', features = list(keywords = list(sentiment = FALSE, emotion = TRUE)), version="?version=2018-03-16")
-
-# example 1 -- rightist news
-righttemotions <- watson_NLU(text = NULL, url = 'http://www.breitbart.com/big-government/2018/04/10/live-updates-mark-zuckerberg-testifies-before-congress/', username = 'YOUR CREDENTIALS HERE', password='YOUR CREDENTIALS HERE', features = list(keywords = list(sentiment = FALSE, emotion = TRUE)), version="?version=2018-03-16")
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
 ```
+
+
+```{r}
+# wrangle the keywords to display a mean score proportional to the relevance
+weighed_relevance <- emotions %>%
+  gather(key = emotion, value = score, sadness, joy, fear, disgust, anger) %>%
+  group_by(emotion) %>%
+  summarize(mean.score= mean(score*key_relevance)) %>%
+  mutate(mean.score = mean.score/sum(mean.score))
+
+# display the results
+ggplot(weighed_relevance, aes(x = emotion, y=mean.score, fill=emotion)) +
+  geom_bar(stat = 'identity', position = "dodge") +
+  labs(x = 'Emotions', y ='Emotion Score', title = 'Emotions of IBMtext', subtitle = "Word relevance weighed average") +
+  scale_fill_discrete('Emotion') +
+  guides(fill=FALSE)
+  theme(axis.text.x = element_text(angle = 25, hjust = 0.7, vjust = 0.8))
+```
+
+![](doc/pictures/readme/5_emotions.png)
+
+
+```{r}
+# gather and summarize the data grouped by most relevant keywords
+emotions_long <- emotions %>%
+  arrange(desc(key_relevance)) %>%
+  head(5) %>%
+  gather( key = emotion, value = score, sadness, joy, fear, disgust, anger) %>%
+  group_by(keyword, emotion) %>% arrange(desc(score)) %>%
+  summarize(mean.score=mean(score))
+
+# display the 5 most relevant keywords and their emotion scores
+ggplot(emotions_long, aes(x = keyword, y=mean.score, fill=emotion)) +
+  geom_bar(stat = 'identity', position = "dodge") +
+  labs(x = '5 Most Relevant Keywords', y ='Emotion Score', title = 'Emotions of IBMtext Keywords', subtitle = "Filtered for the 5 most relevant keyword") +
+  scale_fill_discrete('Emotion') +
+  theme(axis.text.x = element_text(angle = 25, hjust = 0.7, vjust = 0.8))
+```
+
+![](doc/pictures/readme/6_keyemotions.png)
 
 ## Credits
 
