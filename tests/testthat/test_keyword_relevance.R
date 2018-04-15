@@ -12,15 +12,19 @@ credentials <- readRDS("credentials.rds")
 username <- credentials$username
 password <- credentials$password
 
+# authenticate user
+auth_NLU(username = username, password = password)
+
 test_that("Check error handling for missing input", {
 
-  expect_error(with_config({auth_NLU(username = NULL, password = password)}, override = TRUE),
-               "Please specify a valid username and password combination as string arguments.")
+  expect_error(
+    keyword_relevance(input = NULL, input_type='url', limit = 1),
+               "Please specify an input to analyze.")
 })
 
 test_that("Check error handling for non-character input", {
-  expect_error(auth_NLU(username = username, password = as.factor(password)),
-               "Please specify a valid username and password combination as string arguments.")
+  expect_error(keyword_relevance(input = 12345, input_type='url', limit = 1),
+               "Please specify input text or URL as a character string")
 })
 
 # can't clear cache
