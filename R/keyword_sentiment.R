@@ -12,7 +12,7 @@
 #' @param version The release date of the API version to use. Default value is \code{version="?version=2018-03-16"}
 #' @return Dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment.
 #'
-#' @examples
+#' # @examples
 #' library(watsonNLU)
 #'
 #' # Authenticate using Watson NLU API Credentials

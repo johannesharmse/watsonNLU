@@ -13,7 +13,7 @@
 #'
 #' @return A dataframe containing a list of keywords and their corresponding likelihoods for the given input.
 #'
-#' @examples
+#' # @examples
 #' library(watsonNLU)
 #'
 #' # Authenticate using Watson NLU API Credentials

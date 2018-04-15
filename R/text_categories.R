@@ -13,7 +13,7 @@
 #'
 #' @return A dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
 #'
-#' @examples
+#' # @examples
 #' library(watsonNLU)
 #'
 #' # Authenticate using Watson NLU API Credentials

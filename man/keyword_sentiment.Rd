@@ -20,11 +20,8 @@ but not both.}
 }
 \value{
 Dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment.
-}
-\description{
-See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{keyword_sentiment} function takes a text or URL input, along with the input type. The function then returns a dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_sentiment} documentation for more useage cases.
-}
-\examples{
+
+# @examples
 library(watsonNLU)
 
 # Authenticate using Watson NLU API Credentials
@@ -35,5 +32,7 @@ keyword_sentiment(input = 'This is a great API wrapper', input_type='text')
 
 # Find the keywords and related emotions in the given URL input.
 keyword_sentiment(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url')
-
+}
+\description{
+See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to authenticate the Watson NLU API. The \strong{keyword_sentiment} function takes a text or URL input, along with the input type. The function then returns a dataframe containing the sentiments of the keywords extracted from the input, and the likelihood that the input is described by that sentiment. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_sentiment} documentation for more useage cases.
 }

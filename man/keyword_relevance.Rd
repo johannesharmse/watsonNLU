@@ -22,11 +22,8 @@ but not both.}
 }
 \value{
 A dataframe containing a list of keywords and their corresponding likelihoods for the given input.
-}
-\description{
-See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes a text or URL input, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
-}
-\examples{
+
+# @examples
 library(watsonNLU)
 
 # Authenticate using Watson NLU API Credentials
@@ -37,5 +34,7 @@ keyword_relevance(input = 'This is a great API wrapper', input_type='text', limi
 
 # Top 5 keywords from the URL input.
 keyword_relevance(input = 'http://www.nytimes.com/guides/well/how-to-be-happy', input_type='url', limit = 5)
-
+}
+\description{
+See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{sign-up} documentation for step by step instructions to secure your own username and password to enable you to use the Watson NLU API. The \strong{keyword_relevance} function takes a text or URL input, along with the input type. The function then returns a dataframe that contains keywords and their likelihood of being a keyword, from the given input. See the \href{https://github.com/johannesharmse/watsonNLU/blob/master/README.md}{keyword_relevance} documentation for more useage cases.
 }
