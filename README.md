@@ -57,7 +57,10 @@ Natural language processing analyses semantic features of the text while the Wat
 
 This section provides an overview of each of the functions. Please refer to <a href="#installation">Installation</a> for more usage details.
 
-More information and examples can be found in the [User Manual](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/user_manual.md) and the [Installation Manual](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/install_manual.md). 
+More information and examples can be found here:
+* [Installation Manual](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/install_manual.md)
+* [User Manual with Examples](https://github.com/johannesharmse/watsonNLU/blob/master/vignettes/user_manual.md)
+* [Vignette Manual](https://github.com/johannesharmse/watsonNLU/blob/master/doc/watsonNLU-manual.pdf)
 
 #### Authentication
 
