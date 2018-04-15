@@ -14,10 +14,13 @@
 #' @return A dataframe that contains the likelihood that the contents of the URL or text belong to a particular category.
 #'
 #' @examples
-#' library(watsonNLU)
+#'
+#' credentials <- readRDS("credentials.rds")
+#' username <- credentials$username
+#' password <- credentials$password
 #'
 #' # Authenticate using Watson NLU API Credentials
-#' auth_NLU(username="XXXX", password="XXXX")
+#' auth_NLU(username, password)
 #'
 #' # Find 5 categories that describe the text input.
 #' text_categories(input = 'This is a great API wrapper', input_type='text', limit = 5)
