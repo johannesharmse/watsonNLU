@@ -21,9 +21,9 @@ Created by</a></h5>
 <br>
 <h4 align="center">
 
-[![Travis](https://img.shields.io/travis/johannesharmse/watsonNLU.svg?style=social)](https://github.com/johannesharmse/watsonNLU)
+[![Travis](https://img.shields.io/travis/johannesharmse/watsonNLU.svg?style=social)](http://travis-ci.org/johannesharmse/watsonNLU/)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[![Codecov](https://img.shields.io/codecov/c/github/codecov/example-python.svg?style=social)](https://github.com/johannesharmse/watsonNLU)
+[![Codecov](https://img.shields.io/codecov/c/github/codecov/example-python.svg?style=social)](https://codecov.io/gh/johannesharmse/watsonNLU)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![GitHub forks](https://img.shields.io/github/forks/johannesharmse/watsonNLU.svg?style=social)](https://github.com/johannesharmse/watsonNLU/network)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![GitHub issues](https://img.shields.io/github/issues/johannesharmse/watsonNLU.svg?style=social)](https://github.com/johannesharmse/watsonNLU/issues)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
