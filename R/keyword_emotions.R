@@ -45,7 +45,7 @@ keyword_emotions <-  function(input = NULL,
   # We will be extracting emotions of keyword features in our API
   feature_string <- paste0("&features=", "keywords")
   emotion_string <- paste0("&keywords.emotion=true")
-  
+
   # CHECK if input specified or not.
   if (is.null(input)){
     stop("Please specify an input to analyze.")
@@ -80,6 +80,16 @@ keyword_emotions <-  function(input = NULL,
     stop("Input type should be either 'url' or 'text'.")
   }
 
+  # check if credential environment exists
+  if(is.null(watson_credentials) ||
+     !is.environment(watson_credentials)){
+    stop("No credentials found. Provide credentials using watsonNLU::auth_NLU")
+  }
+
+  # get credentials
+  username <- get("username", envir = watson_credentials)
+  password <- get("password", envir = watson_credentials)
+
   # Building the GET query.
   response_json <- GET(
     url = paste0(
@@ -97,13 +107,13 @@ keyword_emotions <-  function(input = NULL,
   ###### CHECK RESPONSE ########
 
   if (status_code(response_json) != 200){
-    
+
     # Include error message returned from the API call.
     message(response_json)
     if(status == 401){
       stop("Invalid or expired credentials provided. Provide credentials using watsonNLU::auth_NLU")
     }
-    
+
     stop("Please make sure you have a valid internet connection and provided a valid input. Check the response log above for further details.")
   }
 
