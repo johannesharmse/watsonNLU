@@ -87,6 +87,16 @@ keyword_relevance <-  function(input = NULL, input_type = NULL, limit = NULL, ve
     limit <- paste0("&", feauture, ".limit=", limit)
   }
 
+  # check if credential environment exists
+  if(is.null(watson_credentials) ||
+     !is.environment(watson_credentials)){
+    stop("No credentials found. Provide credentials using watsonNLU::auth_NLU")
+  }
+
+  # get credentials
+  username <- get("username", envir = watson_credentials)
+  password <- get("password", envir = watson_credentials)
+
 
   ### ENCODING ###
 
@@ -132,7 +142,7 @@ keyword_relevance <-  function(input = NULL, input_type = NULL, limit = NULL, ve
     input,
     features_string,
     limit),
-    # authenticate(username,password),
+    authenticate(username,password),
     add_headers("Content-Type"="application/json")
     )
 
