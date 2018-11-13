@@ -44,7 +44,13 @@ auth_NLU <- function(username = NULL, password=NULL){
     status <- status_code(response)
 
     if (status == 400){
+
+      watson_credentials <<- new.env(parent = globalenv())
+      assign("username", username, envir = watson_credentials)
+      assign("password", password, envir = watson_credentials)
+
       return(print("Valid credentials provided."))
+
     }else if(status == 401){
       stop("Invalid credentials provided.")
     }else{

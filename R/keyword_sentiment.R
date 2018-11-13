@@ -66,6 +66,15 @@ keyword_sentiment <-  function(input = NULL,
     input_type <- tolower(input_type)
   }
 
+  # check if credential environment exists
+  if(is.null(watson_credentials) ||
+     !is.environment(watson_credentials)){
+    stop("No credentials found. Provide credentials using watsonNLU::auth_NLU")
+  }
+
+  # get credentials
+  username <- get("username", envir = watson_credentials)
+  password <- get("password", envir = watson_credentials)
 
   # CHECK if input is text or url and modify input string.
   if (input_type == 'text'){
@@ -90,7 +99,7 @@ keyword_sentiment <-  function(input = NULL,
       feature_string,
       sentiment_string
     ),
-    # authenticate(username, password),
+    authenticate(username, password),
     add_headers("Content=Type"="application/json")
   )
 
