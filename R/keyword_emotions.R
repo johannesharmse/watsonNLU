@@ -100,7 +100,7 @@ keyword_emotions <-  function(input = NULL,
       feature_string,
       emotion_string
     ),
-    # authenticate(username, password),
+    authenticate(username, password),
     add_headers("Content=Type"="application/json")
   )
 

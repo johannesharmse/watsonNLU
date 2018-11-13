@@ -70,7 +70,6 @@ text_categories <-  function(input = NULL, input_type = NULL, version="?version=
     input_type <- tolower(input_type)
   }
 
-
   if (!input_type %in% accepted_input_types){
     stop("Input type should be either 'url' or 'text'.")
   }
@@ -84,6 +83,16 @@ text_categories <-  function(input = NULL, input_type = NULL, version="?version=
   #   limit <- paste0("&", feauture, ".limit=", limit)
   # }
 
+
+  # check if credential environment exists
+  if(is.null(watson_credentials) ||
+     !is.environment(watson_credentials)){
+    stop("No credentials found. Provide credentials using watsonNLU::auth_NLU")
+  }
+
+  # get credentials
+  username <- get("username", envir = watson_credentials)
+  password <- get("password", envir = watson_credentials)
 
   ### ENCODING ###
 
@@ -128,7 +137,7 @@ text_categories <-  function(input = NULL, input_type = NULL, version="?version=
     version,
     input,
     features_string),
-    # authenticate(username,password),
+    authenticate(username,password),
     add_headers("Content-Type"="application/json"))
 
   ### ERROR CHECKING ###
