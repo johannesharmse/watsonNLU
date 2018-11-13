@@ -34,7 +34,7 @@ response_success <- keyword_emotions(input = text_input, input_type='text')
 response_success_url <- keyword_emotions(input = url_input, input_type='url')
 
 test_that("Check error handling for missing input", {
-  
+
   expect_error(
     keyword_relevance(input = NULL, input_type='url'),
     "Please specify an input to analyze.")
